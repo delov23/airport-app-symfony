@@ -35,7 +35,7 @@ services:
         class: Aws\S3\S3Client
         autoconfigure: true
         factory: [Aws\S3\S3Client, 'factory']
-         arguments:
+        arguments:
             -
                 version: 'latest'
                 region: 'eu-central-1'

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Progress
  *
- * @ORM\Table(name="progress")
+ * @ORM\Table(name="progress_types")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProgressRepository")
  */
 class Progress

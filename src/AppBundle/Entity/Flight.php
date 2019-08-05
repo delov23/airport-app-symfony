@@ -2,12 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Flight
  *
- * @ORM\Table(name="flight")
+ * @ORM\Table(name="flights")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FlightRepository")
  */
 class Flight
@@ -22,14 +23,15 @@ class Flight
     private $id;
 
     /**
-     * @var string
+     * @var Route
      *
-     * @ORM\Column(name="route", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Route")
+     * @ORM\JoinColumn(name="route_id", referencedColumnName="flight_number")
      */
     private $route;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="date", type="datetime")
      */
@@ -50,14 +52,14 @@ class Flight
     private $gate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="check_in", type="datetime")
      */
     private $checkIn;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="bags_check_in", type="datetime")
      */
@@ -78,12 +80,23 @@ class Flight
     private $price;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="progress_time", type="time")
      */
     private $progressTime;
 
+    /**
+     * @var Progress
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Progress")
+     * @ORM\JoinColumn(name="progress_id", referencedColumnName="id")
+     */
+    private $progress;
+
+    public function __construct()
+    {
+    }
 
     /**
      * Get id
@@ -96,33 +109,9 @@ class Flight
     }
 
     /**
-     * Set route
-     *
-     * @param string $route
-     *
-     * @return Flight
-     */
-    public function setRoute($route)
-    {
-        $this->route = $route;
-
-        return $this;
-    }
-
-    /**
-     * Get route
-     *
-     * @return string
-     */
-    public function getRoute()
-    {
-        return $this->route;
-    }
-
-    /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param DateTime $date
      *
      * @return Flight
      */
@@ -136,7 +125,7 @@ class Flight
     /**
      * Get date
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDate()
     {
@@ -194,7 +183,7 @@ class Flight
     /**
      * Set checkIn
      *
-     * @param \DateTime $checkIn
+     * @param DateTime $checkIn
      *
      * @return Flight
      */
@@ -208,7 +197,7 @@ class Flight
     /**
      * Get checkIn
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCheckIn()
     {
@@ -218,7 +207,7 @@ class Flight
     /**
      * Set bagsCheckIn
      *
-     * @param \DateTime $bagsCheckIn
+     * @param DateTime $bagsCheckIn
      *
      * @return Flight
      */
@@ -232,7 +221,7 @@ class Flight
     /**
      * Get bagsCheckIn
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getBagsCheckIn()
     {
@@ -288,7 +277,7 @@ class Flight
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getProgressTime()
     {
@@ -296,12 +285,48 @@ class Flight
     }
 
     /**
-     * @param \DateTime $progressTime
+     * @param DateTime $progressTime
      * @return Flight
      */
     public function setProgressTime($progressTime)
     {
         $this->progressTime = $progressTime;
+        return $this;
+    }
+
+    /**
+     * @return Route
+     */
+    public function getRoute(): Route
+    {
+        return $this->route;
+    }
+
+    /**
+     * @param Route $route
+     * @return Flight
+     */
+    public function setRoute(Route $route): Flight
+    {
+        $this->route = $route;
+        return $this;
+    }
+
+    /**
+     * @return Progress
+     */
+    public function getProgress(): Progress
+    {
+        return $this->progress;
+    }
+
+    /**
+     * @param Progress $progress
+     * @return Flight
+     */
+    public function setProgress(Progress $progress): Flight
+    {
+        $this->progress = $progress;
         return $this;
     }
 }

@@ -7,23 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Route
  *
- * @ORM\Table(name="route")
+ * @ORM\Table(name="routes")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RouteRepository")
  */
 class Route
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
      * @var string
      *
+     * @ORM\Id()
      * @ORM\Column(name="flight_number", type="string", length=255, unique=true)
      */
     private $flightNumber;
@@ -74,11 +66,11 @@ class Route
     /**
      * Get id
      *
-     * @return int
+     * @return string
      */
     public function getId()
     {
-        return $this->id;
+        return $this->flightNumber;
     }
 
     /**

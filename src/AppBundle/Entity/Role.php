@@ -2,15 +2,16 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Package
+ * Role
  *
- * @ORM\Table(name="packages")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PackageRepository")
+ * @ORM\Table(name="role")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\RoleRepository")
  */
-class Package
+class Role
 {
     /**
      * @var int
@@ -24,17 +25,22 @@ class Package
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
     /**
-     * @var string
+     * @var ArrayCollection|User[]
      *
-     * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="roles")
      */
-    private $price;
+    private $users;
 
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -51,7 +57,7 @@ class Package
      *
      * @param string $name
      *
-     * @return Package
+     * @return Role
      */
     public function setName($name)
     {
@@ -68,30 +74,6 @@ class Package
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return Package
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 }
 
