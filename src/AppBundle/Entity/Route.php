@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -43,7 +44,7 @@ class Route
     private $toAirport;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="duration", type="time")
      */
@@ -180,7 +181,7 @@ class Route
     /**
      * Set duration
      *
-     * @param \DateTime $duration
+     * @param DateTime $duration
      *
      * @return Route
      */
@@ -194,7 +195,7 @@ class Route
     /**
      * Get duration
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDuration()
     {
