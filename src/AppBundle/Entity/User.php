@@ -4,13 +4,17 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * User
  *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ *
+ * @Vich\Uploadable()
  */
 class User implements UserInterface
 {
@@ -57,6 +61,13 @@ class User implements UserInterface
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $imageName;
+
+    /**
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="user_image", fileNameProperty="imageName")
+     */
+    private $image;
 
     /**
      * @var Role[]|ArrayCollection
@@ -275,6 +286,24 @@ class User implements UserInterface
     public function hasRole(string $role)
     {
         return in_array($role, $this->getRoles());
+    }
+
+    /**
+     * @return File
+     */
+    public function getImage(): File
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param File $image
+     * @return User
+     */
+    public function setImage(File $image): User
+    {
+        $this->image = $image;
+        return $this;
     }
 }
 
