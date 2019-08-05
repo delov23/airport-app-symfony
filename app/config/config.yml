@@ -69,3 +69,29 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+knp_gaufrette:
+    stream_wrapper: ~
+    adapters:
+        document_adapter:
+            aws_s3:
+                service_id: ct_file_store.s3
+                bucket_name: '%aws_bucket_name%'
+                detect_content_type: true
+                options:
+                    create: true
+                    directory: document
+    filesystems:
+        document_fs:
+            adapter:    document_adapter
+
+vich_uploader:
+    db_driver: orm
+    storage: gaufrette
+    mappings:
+        user_image:
+            inject_on_load: true
+            uri_prefix: "%aws_base_url%/users"
+            upload_destination: document_fs
+            delete_on_update:   false
+            delete_on_remove:   false
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

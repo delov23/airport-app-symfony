@@ -1,8 +1,10 @@
 <?php
 
+use Knp\Bundle\GaufretteBundle\KnpGaufretteBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Vich\UploaderBundle\VichUploaderBundle;
 
 class AppKernel extends Kernel
 {
@@ -16,6 +18,8 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new VichUploaderBundle(),
+            new KnpGaufretteBundle(),
             new AppBundle\AppBundle(),
         ];
 
