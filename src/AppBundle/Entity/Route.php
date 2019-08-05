@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Route
@@ -59,6 +60,13 @@ class Route
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $imageName;
+
+    /**
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="flight_image", fileNameProperty="imageName")
      */
     private $image;
 
@@ -218,27 +226,39 @@ class Route
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     *
+     * @return string
+     */
+    public function getImageName(): string
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string $imageName
      * @return Route
      */
-    public function setImage($image)
+    public function setImageName(string $imageName): Route
     {
-        $this->image = $image;
-
+        $this->imageName = $imageName;
         return $this;
     }
 
     /**
-     * Get image
-     *
-     * @return string
+     * @return File
      */
-    public function getImage()
+    public function getImage(): File
     {
         return $this->image;
+    }
+
+    /**
+     * @param File $image
+     * @return Route
+     */
+    public function setImage(File $image): Route
+    {
+        $this->image = $image;
+        return $this;
     }
 }
 

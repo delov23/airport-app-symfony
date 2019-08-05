@@ -1,15 +1,16 @@
 # TODO
 
 ## Entities and Configurations
-- Add documentation
+- Add documentation - for last (TODO -> README)
 - Uploadable annotations for Route/User images
-- Add AWS mappings
+- Add AWS mappings - done
 - Add Security
 - Repository as a Service
 
 ## Functionality
 1. User 
 - Register, Login, Profile
+- (Extra) Reset Password via Email
 2. Route 
 - CRU 
 - View All 
