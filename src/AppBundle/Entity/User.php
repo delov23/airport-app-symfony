@@ -65,7 +65,7 @@ class User implements UserInterface
     /**
      * @var File
      *
-     * @Vich\UploadableField(mapping="user_image", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="user_image", fileNameProperty="imageName", dimensions={})
      */
     private $image;
 
@@ -291,7 +291,7 @@ class User implements UserInterface
     /**
      * @return File
      */
-    public function getImage(): File
+    public function getImage(): ?File
     {
         return $this->image;
     }

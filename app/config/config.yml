@@ -72,17 +72,27 @@ sensio_framework_extra:
 knp_gaufrette:
     stream_wrapper: ~
     adapters:
-        document_adapter:
+        users_adapter:
             aws_s3:
                 service_id: ct_file_store.s3
                 bucket_name: '%aws_bucket_name%'
                 detect_content_type: true
                 options:
                     create: true
-                    directory: document
+                    directory: users
+        flights_adapter:
+            aws_s3:
+                service_id: ct_file_store.s3
+                bucket_name: '%aws_bucket_name%'
+                detect_content_type: true
+                options:
+                    create: true
+                    directory: flights
     filesystems:
-        document_fs:
-            adapter:    document_adapter
+        users_fs:
+            adapter: users_adapter
+        flights_fs:
+            adapter: flights_adapter
 
 vich_uploader:
     db_driver: orm
@@ -91,14 +101,14 @@ vich_uploader:
         user_image:
             inject_on_load: true
             uri_prefix: "%aws_base_url%/users"
-            upload_destination: document_fs
+            upload_destination: users_fs
             delete_on_update:   false
             delete_on_remove:   false
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
         flight_image:
             inject_on_load: true
-            uri_prefix: "%aws_base_url%/flights/images"
-            upload_destination: document_fs
+            uri_prefix: "%aws_base_url%/flights"
+            upload_destination: flights_fs
             delete_on_update:   false
             delete_on_remove:   false
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

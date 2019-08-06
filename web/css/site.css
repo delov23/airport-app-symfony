@@ -171,13 +171,59 @@ nav {
     flex-direction: column;
 }
 
-.form-group input::placeholder {
+.form-group input::placeholder,
+.form-group-2 input::placeholder {
     font-size: 18px;
     color: #2c2c2c4d;
 }
 
 .form-group {
     margin-top: 3vh;
+}
+
+.form-group-2 {
+    margin-top: 3vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+label.file-input {
+    color: #2c2c2c4d;
+    background-color: white;
+    display: inline-block;
+    height: 10vh;
+    line-height: 9vh;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    width: 10vh;
+    border: 2px solid #54a0ff;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+p.file-description {
+    color: white;
+    font-size: 16px;
+    margin: 1px;
+}
+
+.form-group-2 input,
+.form-group-2 select {
+    height: 6vh;
+    border: 2px solid #54a0ff;
+    padding-left: 20px;
+    font-size: 16px;
+    width: 50%; /* Default */
+}
+
+.form-group-2 input.small,
+.form-group-2 select.small {
+    width: 25%;
+}
+
+.form-group-2 input.large {
+    width: 70%;
 }
 
 .form-group input {
@@ -188,11 +234,11 @@ nav {
     font-size: 16px;
 }
 
-.form-group input.error {
+input.error {
     border: 2px solid #be0d0a;
 }
 
-.form-group input.success {
+input.success {
     border: 2px solid #6bd36b;
 }
 
@@ -326,6 +372,12 @@ nav {
     .form-group input::placeholder {
         font-size: 16px;
         line-height: 100%;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .form-group input {
