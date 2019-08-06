@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 /**
  * User
@@ -65,7 +66,7 @@ class User implements UserInterface
     /**
      * @var File
      *
-     * @Vich\UploadableField(mapping="user_image", fileNameProperty="imageName", dimensions={})
+     * @UploadableField(mapping="user_image", fileNameProperty="imageName", dimensions={})
      */
     private $image;
 

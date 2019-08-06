@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 /**
  * Route
@@ -67,7 +68,7 @@ class Route
     /**
      * @var File
      *
-     * @Vich\UploadableField(mapping="flight_image", fileNameProperty="imageName")
+     * @UploadableField(mapping="flight_image", fileNameProperty="imageName", dimensions={})
      */
     private $image;
 
