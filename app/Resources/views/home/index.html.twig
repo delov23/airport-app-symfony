@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+{% endblock %}
+
+{% block main %}
+    <main>
+        <section class="presentation">
+            <div class="intro">
+                <div class="intro-text" data-aos="slide-right" data-aos-duration="1000">
+                    <h1 class="fancy-text">Plovdiv Airport</h1>
+                    <p>
+                        🛫Travelling is our pleasure. <br />
+                        ⏱Explore flights, airports and companies. <br />
+                        🎆Book a travel experience.
+                    </p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000" class="intro-controls">
+                    <button class="btn-fill">Arrivals</button>
+                    <button class="btn-fill">Departures</button>
+                </div>
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
+                    <button class="btn-fill" style="width: 304px;">Log in or Sign up</button>
+                </div>
+            </div>
+
+            <div class="intro-img" data-aos="fade-up" data-aos-duration="1000">
+                <img src="https://technetics.com/img/interactive-illustrations/commercial_airline_main.png" alt="" />
+            </div>
+        </section>
+    </main>
+{% endblock %}

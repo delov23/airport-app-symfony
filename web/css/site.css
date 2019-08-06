@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Tajawal&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: linear-gradient(to top, white, silver) no-repeat fixed;
+}
+
+header {
+    display: flex;
+    width: 80%;
+    height: 10vh;
+    margin: auto;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo {
+    margin-right: 10px;
+    font-weight: 700;
+    word-break: keep-all;
+    font-size: 18px;
+}
+
+.logo-container, .nav-links {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-links {
+    justify-content: flex-end;
+    margin-left: 20%;
+    list-style: none;
+}
+
+.nav-link {
+    white-space: nowrap;
+    margin-left: 2vw;
+    color: #54a0ff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.logo-container {
+    flex: 1;
+    align-items: center;
+}
+
+.logo-container img {
+    margin-right: 10px;
+}
+
+nav {
+    flex: 2;
+    margin-left: 20%;
+}
+
+.btn-controls {
+    padding: 20px 0 0 0;
+}
+
+.btn-fill::first-letter, .btn-outline::first-letter {
+    font-weight: 600;
+}
+
+.btn-wide {
+    width: 25vw !important;
+}
+
+.btn-fill {
+    width: 150px;
+    height: 50px;
+    border: 2px solid transparent;
+    background: #54a0ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin-bottom: 5px;
+}
+
+.btn-fill:hover {
+    border: 2px solid #54a0ff;
+    transition: ease-in-out 0.2s;
+    background: white;
+    color: #54a0ff;
+}
+
+.btn-outline {
+    width: 150px;
+    height: 50px;
+    border: 2px solid #54a0ff;
+    background: transparent;
+    color: #54a0ff;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.btn-outline:hover {
+    border: 2px solid transparent;
+    transition: ease-in-out 0.2s;
+    background: #54a0ff;
+    color: white;
+}
+
+.fancy-text {
+    font-size: 56px;
+    background: linear-gradient(to top, #54a0ff, #8dc0ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.error-msg {
+    color: #d43633;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+/* FORMS */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    min-height: 90vh;
+    margin: auto;
+}
+
+.form {
+    display: flex;
+    background: linear-gradient(to right, #272727, #272727);
+    flex-direction: column;
+    width: 80vw;
+}
+
+.form-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-header h3 {
+    font-size: 20px;
+}
+
+.form-content {
+    padding: 30px;
+    display: flex;
+    width: 70vw;
+    margin: auto;
+    flex-direction: column;
+}
+
+.form-group input::placeholder {
+    font-size: 18px;
+    color: #2c2c2c4d;
+}
+
+.form-group {
+    margin-top: 3vh;
+}
+
+.form-group input {
+    height: 6vh;
+    width: 100%;
+    border: 2px solid #54a0ff;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+.form-group input.error {
+    border: 2px solid #be0d0a;
+}
+
+.form-group input.success {
+    border: 2px solid #6bd36b;
+}
+
+.form-section {
+    border-top: 5px solid transparent;
+    color: rgba(44, 44, 44, 0.4);
+    flex: 1;
+    background: linear-gradient(to right, #97c5fd,#d5e8ff);
+}
+
+.a-form-section {
+    border-left: 5px solid #272727;
+    border-right: 5px solid #272727;
+    border-top: 5px solid #272727;
+    color: rgb(44, 44, 44);
+    flex: 1;
+    background: linear-gradient(to right, #54a0ff, #9dc9ff);
+}
+
+.form-text {
+    font-family: 'Rock Salt', cursive;
+    font-size: 34px;
+    color: white;
+}
+
+.form-none {
+    display: none;
+}
+
+.form-animated {
+    animation: shrink 0.5s;
+    -webkit-animation: shrink 0.5s;
+}
+
+.loader,
+.loader:after {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.loader {
+    margin: 60px auto;
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 0.7em solid #272727;
+    border-right: 0.7em solid #272727;
+    border-bottom: 0.7em solid #272727;
+    border-left: 0.7em solid #ffffff;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 0.7s infinite linear;
+    animation: load8 0.7s infinite linear;
+}
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shrink {
+    0% {
+        border-radius: 100vh;
+        height: 80vh;
+        width: 50vw;
+    }
+
+    50% {
+        border-radius: 100vh;
+        height: 50px;
+        width: 50vw;
+    }
+
+    100% {
+        border-radius: 100vh;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@-webkit-keyframes shrink {
+    0% {
+        border-radius: 100vh;
+        height: 80vh;
+        width: 50vw;
+    }
+
+    50% {
+        border-radius: 100vh;
+        height: 50px;
+        width: 50vw;
+    }
+
+    100% {
+        border-radius: 100vh;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .form {
+        width: 50vw;
+    }
+
+    .form-content {
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .form-group input::placeholder {
+        font-size: 16px;
+        line-height: 100%;
+    }
+
+    .form-group input {
+        height: 7vh;
+    }
+
+    .form-text {
+        font-size: 20px;
+    }
+
+    @keyframes shrink {
+        0% {
+            border-radius: 100vh;
+            height: 40vh;
+            width: 70vw;
+        }
+
+        50% {
+            border-radius: 100vh;
+            height: 50px;
+            width: 70vw;
+        }
+
+        100% {
+            border-radius: 100vh;
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    @-webkit-keyframes shrink {
+        0% {
+            border-radius: 100vh;
+            height: 40vh;
+            width: 70vw;
+        }
+
+        50% {
+            border-radius: 100vh;
+            height: 50px;
+            width: 70vw;
+        }
+
+        100% {
+            border-radius: 100vh;
+            width: 50px;
+            height: 50px;
+        }
+    }
+}

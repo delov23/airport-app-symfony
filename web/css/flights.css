@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight&display=swap');
+
+.departures,
+.arrivals {
+    width: 80vw;
+    margin: auto auto 10px;
+}
+
+.departures h1,
+.arrivals h1 {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    text-align: left;
+}
+
+.table-wrapper>table {
+    border-collapse: collapse;
+    background: linear-gradient(to right, gray, silver);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 22px;
+    padding: 100px;
+}
+
+table td, table th {
+    padding-left: 8px;
+    cursor: default;
+}
+
+.table-wrapper>table thead tr {
+    background: linear-gradient(to top, #54a0ff, #96c2fc);
+    color: white;
+}
+
+.table-wrapper>table tr {
+    height: 40px;
+    background-color: lightyellow;
+}
+
+.table-wrapper>table tbody tr:hover {
+    background-color: rgb(255, 161, 161);
+}
+
+.flights-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flights-header input {
+    height: 6vh;
+    width: 40vw;
+    border: 2px solid #54a0ff;
+    padding-left: 20px;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.flights-header input::placeholder {
+    font-size: 18px;
+    color: rgba(44, 44, 44, 0.5);
+}
+
+.invisible {
+    display: none;
+}
+
+.weather {
+    display: flex;
+    width: 80vw;
+    margin: auto;
+    justify-content: space-evenly;
+}
+
+.weather-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#weather-img {
+    filter: drop-shadow(1px 1px 4px black);
+}
+ 
+@media screen and (max-width: 700px) {
+    .flights-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .flights-header input {
+        width: 100%;
+    }
+}

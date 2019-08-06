@@ -1,0 +1,62 @@
+.routes-text {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 44px;
+}
+
+.routes {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin: auto;
+}
+
+.routes > .route {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 30vh;
+    padding-right: 20px;
+    box-shadow: 5px 5px 22px black;
+    background: linear-gradient(to right, #d3f4ff57, #b3e8fa9f);
+    margin-bottom: 4vh;
+}
+
+.route > img {
+    height: 30vh;
+}
+
+.route-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.route-info > button {
+    margin-top: 15px;
+}
+
+.route-info > h2 {
+    font-size: 32px;
+    text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+    .routes > .route {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 20px;
+        padding-right: 0; 
+        height: 100%;
+    }
+
+    .route-info {
+        align-items: center;
+    }
+
+    .route-info > h2 {
+        font-size: 28px;
+    }
+}

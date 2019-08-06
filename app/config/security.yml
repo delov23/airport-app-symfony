@@ -14,7 +14,7 @@ security:
     firewalls:
         secured_area:
             pattern: ^/
-
+            logout_on_user_change: true
             anonymous: true
 
             form_login:

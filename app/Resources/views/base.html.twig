@@ -1,13 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{% block title %}Plovdiv Airport{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+            <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block header %}
+            <header>
+                <div class="logo-container">
+                    <img src="https://www.stlouisdowntownairport.com/wp-content/uploads/2014/02/plane-icon2.png" width="25px" height="25px" alt="" />
+                    <h4 class="logo">Plovdiv Airport</h4>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a class="nav-link" href="#">Login</a></li>
+                        <li><a class="nav-link" href="#">Register</a></li>
+                        <li><a class="nav-link" href="#">Arrivals and Departures</a></li>
+                    </ul>
+                </nav>
+            </header>
+        {% endblock %}
+        {% block main %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+            <script>
+                AOS.init();
+            </script>
+        {% endblock %}
     </body>
 </html>
