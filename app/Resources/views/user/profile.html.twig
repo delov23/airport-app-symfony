@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ user.fullName }}'s Profile
+{% endblock %}
+
+{% block main %}
+    <main class="main-section">
+        <h1 class="text-center fancy-text">
+            Welcome, {{ user.title }} {{ user.fullName }}
+        </h1>
+        <h2 class="text-center fancy-text-small">Email: {{ user.email }} | Trips booked: {{ user.reservations|length }} </h2>
+        <div class="columns margin-top">
+            <div class="column">
+                <h2>Upcoming trips</h2>
+                {% for trip in user.reservations %}
+                    {{ trip.flight.route.flightNumber }}
+                {% endfor %}
+            </div>
+            <div class="column">
+                <h2>Your account</h2>
+                <button class="btn btn-outline bg-white">Request password change</button>
+                <button class="btn btn-outline bg-white">Edit your personal information</button>
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

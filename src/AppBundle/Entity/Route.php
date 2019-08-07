@@ -2,9 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 /**
@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
  *
  * @ORM\Table(name="routes")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RouteRepository")
+ * @Vich\Uploadable()
  */
 class Route
 {
@@ -45,9 +46,9 @@ class Route
     private $toAirport;
 
     /**
-     * @var DateTime
+     * @var string
      *
-     * @ORM\Column(name="duration", type="time")
+     * @ORM\Column(name="duration", type="string", length=6)
      */
     private $duration;
 
@@ -59,14 +60,14 @@ class Route
     private $seats;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $imageName;
 
     /**
-     * @var File
+     * @var File|null
      *
      * @UploadableField(mapping="flight_image", fileNameProperty="imageName", dimensions={})
      */
@@ -182,7 +183,7 @@ class Route
     /**
      * Set duration
      *
-     * @param DateTime $duration
+     * @param string $duration
      *
      * @return Route
      */
@@ -196,7 +197,7 @@ class Route
     /**
      * Get duration
      *
-     * @return DateTime
+     * @return string
      */
     public function getDuration()
     {
@@ -228,9 +229,9 @@ class Route
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getImageName(): string
+    public function getImageName(): ?string
     {
         return $this->imageName;
     }
@@ -246,9 +247,9 @@ class Route
     }
 
     /**
-     * @return File
+     * @return File|null
      */
-    public function getImage(): File
+    public function getImage(): ?File
     {
         return $this->image;
     }

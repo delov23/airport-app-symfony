@@ -310,6 +310,7 @@ class User implements UserInterface, Serializable
 
     public function serialize()
     {
+        $this->image = base64_encode($this->image);
         return serialize([
             $this->id,
             $this->email,

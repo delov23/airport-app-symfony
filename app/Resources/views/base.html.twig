@@ -1,42 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{% block title %}Plovdiv Airport{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/site.css') }}">
-            <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block header %}
-            <header>
-                <div class="logo-container">
-                    <img src="https://www.stlouisdowntownairport.com/wp-content/uploads/2014/02/plane-icon2.png" width="25px" height="25px" alt="" />
-                    <h4 class="logo">Plovdiv Airport</h4>
-                </div>
-                <nav>
-                    <ul class="nav-links">
-                        <li><a class="nav-link" href="{{ path('security_login') }}">Login</a></li>
-                        <li><a class="nav-link" href="{{ path('user_register') }}">Register</a></li>
-                        <li><a class="nav-link" href="#">Arrivals</a></li>
-                        <li><a class="nav-link" href="#">Departures</a></li>
-                        <li><a class="nav-link" href="{{ path('security_logout') }}">Logout</a></li>
-                    </ul>
-                </nav>
-            </header>
-        {% endblock %}
-        {% block main %}{% endblock %}
-        {% block javascripts %}
-            <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-            {# <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script> #}
-            <script>
-                AOS.init();
-            </script>
-            <script src="{{ asset('js/form.js') }}"></script>
-        {% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Plovdiv Airport{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+        <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+        <style>
+
+        </style>
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+{% block header %}
+    <header>
+        <a href="{{ path('index') }}">
+            <div class="logo-container">
+                <img src="https://www.stlouisdowntownairport.com/wp-content/uploads/2014/02/plane-icon2.png"
+                     width="25px"
+                     height="25px" alt=""/>
+                <h4 class="logo">Plovdiv Airport</h4>
+            </div>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a class="nav-link" href="#">Arrivals</a></li>
+                <li><a class="nav-link" href="#">Departures</a></li>
+                {% if app.user is null %}
+                    <li><a class="nav-link" href="{{ path('security_login') }}">Login</a></li>
+                    <li><a class="nav-link" href="{{ path('user_register') }}">Register</a></li>
+                {% else %}
+                    <li><a class="nav-link" href="{{ path('security_logout') }}">Logout</a></li>
+                    <li>
+                        <a class="nav-link" href="{{ path('user_profile') }}">
+                            <div class="profile-pic-wrapper text-center">
+                                <img class="profile-pic" src="{{ vich_uploader_asset(app.user, 'image') }}">
+                            </div>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+{% endblock %}
+{% block main %}{% endblock %}
+{% block javascripts %}
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    {# <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script> #}
+    <script>
+        AOS.init();
+    </script>
+    <script src="{{ asset('js/form.js') }}"></script>
+{% endblock %}
+</body>
 </html>

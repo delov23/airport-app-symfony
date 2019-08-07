@@ -12,19 +12,19 @@
 ## Functionality
 0. Home
 - Landing - ✅
-- Base
+- Base - ✅
 1. User 
-- Register ✅, Login ✅, Profile
+- Register ✅, Login ✅, Profile ✅, Edit
 - (Extra) Reset Password via Email
 2. Route 
-- CRU 
+- C ✅, R, U 
 - View All 
 - Delete -> make inactive
 3. Flight 
-- CRU 
+- C, R, U 
 - View Departures/Arrivals 
 - Search for flight and make a reservation 
-- Delete -> completed
+- Delete -> make completed
 4. Reservation 
 - Book, Preview 
 - Get Ticket At Email

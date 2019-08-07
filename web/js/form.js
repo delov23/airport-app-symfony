@@ -2,20 +2,21 @@ let form = document.getElementById('form');
 
 document.getElementById('test-btn')
     .addEventListener('click', () => {
+        if (form.checkValidity()) {
+            console.log('here');
+            for (let child of form.children[0].children) {
+                child.classList.add('form-none');
+            }
 
-        for (let child of form.children[0].children) {
-            child.classList.add('form-none');
+            let animate = document.getElementById('animate');
+            animate.classList.add('form-animated');
+            let newEl = document.createElement('div');
+            newEl.className = "loader";
+            setTimeout(() => {
+                animate.classList = '';
+                animate.append(newEl);
+            }, 510);
         }
-
-        let animate = document.getElementById('animate');
-        animate.classList.add('form-animated');
-        let newEl = document.createElement('div');
-        newEl.className = "loader";
-        let {body} = event;
-        setTimeout(() => {
-            animate.classList = "";
-            animate.append(newEl);
-        }, 510);
     });
 
 document.getElementById('input-img')

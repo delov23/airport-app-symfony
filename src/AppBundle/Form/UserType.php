@@ -44,11 +44,12 @@ class UserType extends AbstractType
             ])
             ->add('image', VichFileType::class, [
                 'data_class' => null,
-                'required' => false,
+                'required' => true,
                 'allow_delete' => false,
                 'download_link' => true,
                 'constraints' => [
-                    new Image(['maxSize' => '2M'])
+                    new Image(['maxSize' => '2M']),
+                    new NotBlank()
                 ]
             ])
             ->add('password', RepeatedType::class, [

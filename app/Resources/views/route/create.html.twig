@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Route{% endblock %}
+
+{% block main %}
+    <main>
+        <section class="form-wrapper" data-aos="fade-down">
+            <form id="form" action="{{ path('route_create') }}" method="post" enctype="multipart/form-data">
+                <div class="form" id="animate">
+                    <div class="form-header">
+                        <div class="a-form-section">
+                            <h3 class="text-center">NEW ROUTE</h3>
+                        </div>
+                    </div>
+                    <div class="form-content">
+                        <div class="form-group text-center">
+                            <label class="file-input" for="input-img">+</label>
+                            <p class="file-description">Upload a route picture</p>
+                            <input type="file" accept="image/*" id="input-img" style="display: none;"
+                                   placeholder="Profile Picture" name="route[image][file]"/>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" placeholder="Flight Number Registration" name="route[flightNumber]"
+                                   value="{{ route.flightNumber }}"/>
+                            <p class="error-msg">{% if errors.flightNumber is defined %}{{ errors.flightNumber|join(', ') }}{% endif %}</p>
+                        </div>
+
+                        <div class="form-group-2">
+                            <input type="text" placeholder="From (Airport Id)" name="route[fromAirport]"
+                                   value="{{ route.fromAirport }}"/>
+                            <input type="text" placeholder="To (Airport Id)" name="route[toAirport]"
+                                   value="{{ route.toAirport }}"/>
+                        </div>
+                        <p class="text-white">*Make sure that at least one of them is Plovdiv Airport [PLD]</p>
+
+                        <div class="form-group-2">
+                            <input type="text" placeholder="Company" name="route[company]" value="{{ route.company }}"/>
+                            <input type="text" placeholder="Duration (H:m)" name="route[duration]"
+                                   value="{{ route.duration }}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="number" placeholder="Seats" name="route[seats]" value="{{ route.seats }}"/>
+                        </div>
+
+                        {{ form_row(form._token) }}
+
+                        <div class="form-group text-center">
+                            <button id="test-btn" type="submit" class="btn-fill">Register Route</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+{% endblock %}

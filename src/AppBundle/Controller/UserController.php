@@ -55,10 +55,13 @@ class UserController extends BaseController
     }
 
     /**
+     * @Route("/profile", methods={"GET"}, name="user_profile")
      *
+     * @param Request $request
+     * @return Response
      */
-    public function profileView()
+    public function profileView(Request $request)
     {
-
+        return $this->render('user/profile.html.twig', ['user' => $this->getUser()]);
     }
 }
