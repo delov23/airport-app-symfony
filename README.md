@@ -5,15 +5,16 @@
 - Uploadable annotations for Route/User images - ✅
 - Add AWS mappings - ✅
 - Add Security - ✅
-- Repository as a Service
+- Repository as a Service - ✅
 - Constraints and verifications
+- Login, Register -> check if anonymous
 
 ## Functionality
 0. Home
 - Landing - ✅
 - Base
 1. User 
-- Register ✅, Login, Profile
+- Register ✅, Login ✅, Profile
 - (Extra) Reset Password via Email
 2. Route 
 - CRU 
