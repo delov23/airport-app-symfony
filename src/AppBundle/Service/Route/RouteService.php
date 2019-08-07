@@ -26,4 +26,19 @@ class RouteService extends AbstractService implements RouteServiceInterface
     {
         $this->save($route);
     }
+
+    /**
+     * @return Route[]|null
+     */
+    public function getAll(): ?array
+    {
+        return $this->routeRepository->findAll();
+    }
+
+    public function getById($id): ?Route
+    {
+        /** @var $route Route */
+        $route = $this->routeRepository->find($id);
+        return $route;
+    }
 }

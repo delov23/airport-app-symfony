@@ -43,15 +43,11 @@ class UserController extends BaseController
      */
     public function registerProcess(Request $request)
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $this->userService->register($user);
-            return $this->redirectToRoute('index');
-        } else {
-            return $this->render('user/register.html.twig', $this->getFormArray(UserType::class, $user, 'user'));
-        }
+        return $this->verifyEntity(UserType::class, 'user', new User(), $request, 'user/register.html.twig',
+            function ($user) {
+                $this->userService->register($user);
+            }, 'security_login'
+        );
     }
 
     /**

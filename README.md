@@ -17,8 +17,8 @@
 - Register ✅, Login ✅, Profile ✅, Edit
 - (Extra) Reset Password via Email
 2. Route 
-- C ✅, R, U 
-- View All 
+- C ✅, R ✅, U 
+- View All ✅
 - Delete -> make inactive
 3. Flight 
 - C, R, U 

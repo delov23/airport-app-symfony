@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Flight;
+use AppBundle\Form\FlightType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -23,11 +25,10 @@ class FlightController extends BaseController
     /**
      * @Route("/create", name="flight_create", methods={"GET"})
      *
-     * @param $type string
      * @return Response
      */
-    public function createView($type)
+    public function createView()
     {
-        return $this->render('flight/create.html.twig');
+        return $this->render('flight/create.html.twig', $this->getFormArray(FlightType::class, new Flight(), 'flight'));
     }
 }

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Flight{% endblock %}
+
+{% block main %}
+    <main>
+        <section class="form-wrapper" data-aos="fade-down">
+            <form id="form" action="{{ path('flight_create') }}" method="post" enctype="multipart/form-data">
+                <div class="form" id="animate">
+                    <div class="form-header">
+                        <div class="a-form-section">
+                            <h3 class="text-center">NEW FLIGHT</h3>
+                        </div>
+                    </div>
+                    <div class="form-content">
+                        <div class="form-group">
+                            <select name="flight[routeId]">
+                                <option value="" selected disabled>Route ...</option>
+                            </select>
+                            <p class="error-msg">{% if errors.flightNumber is defined %}{{ errors.flightNumber|join(', ') }}{% endif %}</p>
+                        </div>
+
+{#                        <div class="form-group-2">#}
+{#                            <input type="text" placeholder="From (Airport Id)" name="route[fromAirport]"#}
+{#                                   value="{{ route.fromAirport }}"/>#}
+{#                            <input type="text" placeholder="To (Airport Id)" name="route[toAirport]"#}
+{#                                   value="{{ route.toAirport }}"/>#}
+{#                        </div>#}
+{#                        <p class="text-white">*Make sure that at least one of them is Plovdiv Airport [PLD]</p>#}
+{#                        <p class="error-msg">{% if errors.fromAirport is defined %}{{ errors.fromAirport|join(', ') }}{% endif %}</p>#}
+{#                        <p class="error-msg">{% if errors.toAirport is defined %}{{ errors.toAirport|join(', ') }}{% endif %}</p>#}
+
+{#                        <div class="form-group-2">#}
+{#                            <input type="text" placeholder="Company" name="route[company]" value="{{ route.company }}"/>#}
+{#                            <input type="text" placeholder="Duration (H:m)" name="route[duration]"#}
+{#                                   value="{{ route.duration }}"/>#}
+{#                        </div>#}
+{#                        <p class="error-msg">{% if errors.duration is defined %}{{ errors.duration|join(', ') }}{% endif %}</p>#}
+{#                        <p class="error-msg">{% if errors.company is defined %}{{ errors.company|join(', ') }}{% endif %}</p>#}
+
+{#                        <div class="form-group">#}
+{#                            <input type="number" placeholder="Seats" name="route[seats]" value="{{ route.seats }}"/>#}
+{#                            <p class="error-msg">{% if errors.seats is defined %}{{ errors.seats|join(', ') }}{% endif %}</p>#}
+{#                        </div>#}
+
+                        {{ form_row(form._token) }}
+
+                        <div class="form-group text-center">
+                            <button id="test-btn" type="submit" class="btn-fill">Register Flight</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+{% endblock %}

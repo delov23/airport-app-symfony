@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Routes
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/routes.css') }}">
+{% endblock %}
+
+{% block main %}
+    <main>
+        <h1 class="routes-text">Our Destinations</h1>
+        <section class="routes">
+            {% for route in routes %}
+            <div class="route">
+                <img src="{{ vich_uploader_asset(route, 'image') }}" alt="">
+                <div class="route-info">
+                    <h2>Travel to <span class="toAirport">{{ route.toAirport }}</span></h2>
+                    <a href="">
+                        <button class="btn-fill">Learn more ❯❯</button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{#    <script>#}
+{#        for (let item of document.getElementsByClassName('toAirport')) {#}
+{#            let data = fetch('');#}
+{#            item.innerText = fetch()#}
+{#        }#}
+{#    </script>#}
+{% endblock %}
+

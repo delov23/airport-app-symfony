@@ -49,4 +49,24 @@ class RouteController extends BaseController
             }
         );
     }
+
+    /**
+     * @Route("/all", name="all_routes", methods={"GET"})
+     *
+     * @return Response
+     */
+    public function allView()
+    {
+        return $this->render('route/all.html.twig', ['routes' => $this->routeService->getAll()]);
+    }
+
+    /**
+     * @Route("/{id}", name="route_details", methods={"GET"})
+     *
+     * @return Response
+     */
+    public function detailsView($id)
+    {
+        return $this->render('route/details.html.twig', ['route' => $this->routeService->getById($id)]);
+    }
 }

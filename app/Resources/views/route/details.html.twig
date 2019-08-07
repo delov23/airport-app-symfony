@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Route {{ route.id }}
+{% endblock %}
+
+{% block main %}
+    <main class="main-section">
+        <h1 class="text-center fancy-text">Route {{ route.id }}</h1>
+        <h2 id="company" class="text-center">Operated by: {{ route.company }}, Seat count: {{ route.seats }}</h2>
+        <div class="text-center margin-top">
+            <img class="shadow-img" width="50%" src="{{ vich_uploader_asset(route, 'image') }}" alt="">
+        </div>
+        <div class="columns text-center margin-top">
+            <div class="column">
+                <h2>{{ route.fromAirport }}</h2>
+            </div>
+            <div class="column" style="display: flex; justify-content: center">
+                <img src="http://cdn.onlinewebfonts.com/svg/img_546889.png"
+                     width="30vw" alt="">
+            </div>
+            <div class="column">
+                <h2>{{ route.toAirport }}</h2>
+            </div>
+        </div>
+        <div class="columns text-center">
+            <div class="column"><h3>{{ route.duration }} hours</h3></div>
+        </div>
+    </main>
+{% endblock %}
+

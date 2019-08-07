@@ -18,6 +18,12 @@
                     </div>
                     <div class="form-content">
                         <h1 class="form-text text-center">Welcome back!</h1>
+{#                        {{ dump(app.flashes('error')) }}#}
+                        {% for message in app.session.flashBag.get('error') %}
+                            <div class="error-msg text-center">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                         <div class="form-group">
                             <input type="email"
                                    id="user_email"

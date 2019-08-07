@@ -29,6 +29,10 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    bundle.login.failure:
+        class: 'AppBundle\Service\Security\AuthFail'
+        arguments: ['@kernel', '@security.http_utils', '@session.flash_bag']
+
     Aws\S3\S3Client: '@ct_file_store.s3'
 
     ct_file_store.s3:

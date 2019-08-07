@@ -53,6 +53,7 @@ class UserType extends AbstractType
                 ]
             ])
             ->add('password', RepeatedType::class, [
+                'invalid_message' => 'Passwords should match',
                 'type' => PasswordType::class,
                 'constraints' => [
                     new Length(['min' => 5, 'max' => 80]),

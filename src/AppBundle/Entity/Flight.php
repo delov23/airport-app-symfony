@@ -23,7 +23,7 @@ class Flight
     private $id;
 
     /**
-     * @var Route
+     * @var Route|null
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Route")
      * @ORM\JoinColumn(name="route_id", referencedColumnName="flight_number")
@@ -297,7 +297,7 @@ class Flight
     /**
      * @return Route
      */
-    public function getRoute(): Route
+    public function getRoute(): ?Route
     {
         return $this->route;
     }
