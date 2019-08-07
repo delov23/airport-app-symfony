@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -17,7 +18,7 @@ use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
  *
  * @Vich\Uploadable()
  */
-class User implements UserInterface
+class User implements UserInterface, Serializable
 {
     /**
      * @var int
@@ -64,7 +65,7 @@ class User implements UserInterface
     private $imageName;
 
     /**
-     * @var File
+     * @var File|null
      *
      * @UploadableField(mapping="user_image", fileNameProperty="imageName", dimensions={})
      */
@@ -305,6 +306,34 @@ class User implements UserInterface
     {
         $this->image = $image;
         return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->title,
+            $this->fullName,
+            $this->roles,
+            $this->reservations,
+            $this->imageName
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->title,
+            $this->fullName,
+            $this->roles,
+            $this->reservations,
+            $this->imageName,
+            ) = unserialize($serialized);
     }
 }
 

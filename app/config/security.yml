@@ -1,25 +1,26 @@
-# To get started with security, check out the documentation:
-# https://symfony.com/doc/current/security.html
 security:
     encoders:
-        AppBundle\Entity\User:
-            algorithm: bcrypt
-            cost: 12
+        AppBundle\Entity\User: bcrypt
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
+        # To load users from somewhere else: http://symfony.com/doc/current/cookbook/security/custom_provider.html
         database_users:
             entity: { class: AppBundle:User, property: email }
 
     firewalls:
         secured_area:
             pattern: ^/
-            logout_on_user_change: true
+
             anonymous: true
 
             form_login:
                 check_path: security_login
                 login_path: security_login
                 csrf_token_generator: security.csrf.token_manager
+
+            logout:
+                path: security_logout
+                target: index
+
 
     access_control:

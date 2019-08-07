@@ -5,13 +5,13 @@
 {% block main %}
     <main>
         <section class="form-wrapper" data-aos="fade-down">
-            <form id="form" method="post" enctype="multipart/form-data">
+            <form id="form" action="{{ path('user_register') }}" method="post" enctype="multipart/form-data">
                 <div class="form" id="animate">
                     <div class="form-header">
-                        <a class="form-section" href="">
+                        <a class="form-section" href="{{ path('security_login') }}">
                             <h3 class="text-center">SIGN IN</h3>
                         </a>
-                        <a class="a-form-section" href="">
+                        <a class="a-form-section" href="{{ path('user_register') }}">
                             <h3 class="text-center">SIGN UP</h3>
                         </a>
                     </div>
@@ -20,15 +20,15 @@
                         <div class="form-group text-center">
                             <label class="file-input" for="input-img">+</label>
                             <p class="file-description">Upload a profile picture</p>
-                            <input type="file" id="input-img" style="display: none;" placeholder="Profile Picture" name="user[image][file]"/>
+                            <input type="file" accept="image/*" id="input-img" style="display: none;" placeholder="Profile Picture" name="user[image][file]" />
                         </div>
                         <div class="form-group-2">
-                            <input class="small" type="text" placeholder="Title" name="user[title]"/>
-                            <input class="large" type="text" placeholder="Name" name="user[fullName]"/>
+                            <input class="small" type="text" placeholder="Title" name="user[title]" value="{{ user.title }}" />
+                            <input class="large" type="text" placeholder="Name" name="user[fullName]" value="{{ user.fullName }}" />
                         </div>
 
                         <div class="form-group">
-                            <input type="text" placeholder="Email" name="user[email]"/>
+                            <input type="text" placeholder="Email" name="user[email]" value="{{ user.email }}" />
                         </div>
 
                         <div class="form-group">
@@ -49,10 +49,4 @@
             </form>
         </section>
     </main>
-{% endblock %}
-{#Classes that can be added to input: error/success#}
-{#<p class="error-msg">You are not supposed to do that.</p>#}
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/form.js') }}"></script>
 {% endblock %}

@@ -10,24 +10,53 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 use Vich\UploaderBundle\Form\Type\VichFileType;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('email', EmailType::class)
-            ->add('fullName', TextType::class)
-            ->add('title', TextType::class)
+        $builder
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new Email(),
+                    new NotBlank()
+                ]
+            ])
+            ->add('fullName', TextType::class, [
+                'constraints' => [
+                    new Regex('/^[A-Z][a-z]+\s[A-Z][a-z]+$/'),
+                    new Length(['min' => 5, 'max' => 35]),
+                    new NotBlank()
+                ]
+            ])
+            ->add('title', TextType::class, [
+                'constraints' => [
+                    new Length(['min' => 2, 'max' => 10]),
+                    new NotBlank()
+                ]
+            ])
             ->add('image', VichFileType::class, [
-                'data_class'    => null,
-                'required'      => false,
-                'allow_delete'  => false,
+                'data_class' => null,
+                'required' => false,
+                'allow_delete' => false,
                 'download_link' => true,
+                'constraints' => [
+                    new Image(['maxSize' => '2M'])
+                ]
             ])
             ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class
+                'type' => PasswordType::class,
+                'constraints' => [
+                    new Length(['min' => 5, 'max' => 80]),
+                    new NotBlank()
+                ]
             ]);
     }
 
