@@ -227,7 +227,8 @@ p.file-description {
     width: 70%;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
     height: 6vh;
     width: 100%;
     border: 2px solid #54a0ff;

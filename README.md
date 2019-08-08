@@ -5,6 +5,7 @@
 - Uploadable annotations for Route/User images - ✅
 - Add AWS mappings - ✅
 - Add Security - ✅
+- Add Authentication & Authorisation
 - Repository as a Service - ✅
 - Constraints and verifications
 - Login, Register -> check if anonymous
@@ -21,7 +22,7 @@
 - View All ✅
 - Delete -> make inactive
 3. Flight 
-- C, R, U 
+- C ✅, R, U 
 - View Departures/Arrivals 
 - Search for flight and make a reservation 
 - Delete -> make completed

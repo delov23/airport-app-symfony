@@ -45,30 +45,30 @@ class Flight
     private $terminal;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="gate", type="string", length=255)
+     * @ORM\Column(name="gate", type="string", length=255, nullable=true, options={"default": null})
      */
     private $gate;
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      *
-     * @ORM\Column(name="check_in", type="datetime")
+     * @ORM\Column(name="check_in", type="datetime", nullable=true, options={"default": null})
      */
     private $checkIn;
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      *
-     * @ORM\Column(name="bags_check_in", type="datetime")
+     * @ORM\Column(name="bags_check_in", type="datetime", nullable=true, options={"default": null})
      */
     private $bagsCheckIn;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="seats_taken", type="integer")
+     * @ORM\Column(name="seats_taken", type="integer", options={"default": 0})
      */
     private $seatsTaken;
 
@@ -80,19 +80,20 @@ class Flight
     private $price;
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      *
-     * @ORM\Column(name="progress_time", type="time")
+     * @ORM\Column(name="progress_time", type="time", nullable=true)
      */
     private $progressTime;
 
     /**
-     * @var Progress
+     * @var Progress|null
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Progress")
-     * @ORM\JoinColumn(name="progress_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="progress_id", referencedColumnName="id", nullable=true)
      */
     private $progress;
+
 
     public function __construct()
     {
@@ -173,7 +174,7 @@ class Flight
     /**
      * Get gate
      *
-     * @return string
+     * @return string|null
      */
     public function getGate()
     {
@@ -197,7 +198,7 @@ class Flight
     /**
      * Get checkIn
      *
-     * @return DateTime
+     * @return DateTime|null
      */
     public function getCheckIn()
     {
@@ -221,7 +222,7 @@ class Flight
     /**
      * Get bagsCheckIn
      *
-     * @return DateTime
+     * @return DateTime|null
      */
     public function getBagsCheckIn()
     {
@@ -277,7 +278,7 @@ class Flight
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
     public function getProgressTime()
     {

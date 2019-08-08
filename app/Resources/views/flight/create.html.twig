@@ -14,34 +14,29 @@
                     </div>
                     <div class="form-content">
                         <div class="form-group">
-                            <select name="flight[routeId]">
+                            <select name="flight[route]">
                                 <option value="" selected disabled>Route ...</option>
+                                {% for route in routes %}
+                                    <option value="{{ loop.index - 1 }}">{{ route.flightNumber }} - {{ route.fromAirport }} -> {{ route.toAirport }}</option>
+                                {% endfor %}
                             </select>
-                            <p class="error-msg">{% if errors.flightNumber is defined %}{{ errors.flightNumber|join(', ') }}{% endif %}</p>
+                            <p class="error-msg">{% if errors.route is defined %}{{ errors.route|join(' ') }}{% endif %}</p>
                         </div>
 
-{#                        <div class="form-group-2">#}
-{#                            <input type="text" placeholder="From (Airport Id)" name="route[fromAirport]"#}
-{#                                   value="{{ route.fromAirport }}"/>#}
-{#                            <input type="text" placeholder="To (Airport Id)" name="route[toAirport]"#}
-{#                                   value="{{ route.toAirport }}"/>#}
-{#                        </div>#}
-{#                        <p class="text-white">*Make sure that at least one of them is Plovdiv Airport [PLD]</p>#}
-{#                        <p class="error-msg">{% if errors.fromAirport is defined %}{{ errors.fromAirport|join(', ') }}{% endif %}</p>#}
-{#                        <p class="error-msg">{% if errors.toAirport is defined %}{{ errors.toAirport|join(', ') }}{% endif %}</p>#}
+                        <div class="form-group">
+                            <input type="datetime-local" placeholder="Date" name="flight[date]" value="{{ flight.date }}"/>
+                            <p class="error-msg">{% if errors.date is defined %}{{ errors.date|join(' ') }}{% endif %}</p>
+                        </div>
 
-{#                        <div class="form-group-2">#}
-{#                            <input type="text" placeholder="Company" name="route[company]" value="{{ route.company }}"/>#}
-{#                            <input type="text" placeholder="Duration (H:m)" name="route[duration]"#}
-{#                                   value="{{ route.duration }}"/>#}
-{#                        </div>#}
-{#                        <p class="error-msg">{% if errors.duration is defined %}{{ errors.duration|join(', ') }}{% endif %}</p>#}
-{#                        <p class="error-msg">{% if errors.company is defined %}{{ errors.company|join(', ') }}{% endif %}</p>#}
+                        <div class="form-group">
+                            <input type="number" step="2" placeholder="Price per normal seat" name="flight[price]" value="{{ flight.price }}"/>
+                            <p class="error-msg">{% if errors.price is defined %}{{ errors.price|join(' ') }}{% endif %}</p>
+                        </div>
 
-{#                        <div class="form-group">#}
-{#                            <input type="number" placeholder="Seats" name="route[seats]" value="{{ route.seats }}"/>#}
-{#                            <p class="error-msg">{% if errors.seats is defined %}{{ errors.seats|join(', ') }}{% endif %}</p>#}
-{#                        </div>#}
+                        <div class="form-group">
+                            <input type="text" placeholder="Terminal of departure" name="flight[terminal]" value="{{ flight.terminal }}"/>
+                            <p class="error-msg">{% if errors.terminal is defined %}{{ errors.terminal|join(' ') }}{% endif %}</p>
+                        </div>
 
                         {{ form_row(form._token) }}
 
