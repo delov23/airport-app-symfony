@@ -98,25 +98,25 @@ nav {
 }
 
 .btn-fill-warning {
-    width: 150px;
+    width: 50px;
     height: 50px;
     border: 2px solid transparent;
     background: #ffd042;
     color: white;
     cursor: pointer;
     transition: 0.2s ease-in-out;
-    margin-bottom: 5px;
+    margin: 5px;
 }
 
 .btn-fill-danger {
-    width: 150px;
+    width: 50px;
     height: 50px;
     border: 2px solid transparent;
     background: #ff4f56;
     color: white;
     cursor: pointer;
     transition: 0.2s ease-in-out;
-    margin-bottom: 5px;
+    margin: 5px;
 }
 
 .more-info {

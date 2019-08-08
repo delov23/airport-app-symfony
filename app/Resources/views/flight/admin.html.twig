@@ -35,7 +35,7 @@
                         <td>{{ flight.route.seats }}/{{ flight.seatsTaken }}</td>
                         <td>{{ flight.progress.event }} {{ flight.progressTime }}</td>
                         <td>{{ flight.terminal }}/{% if flight.gate %}{{ flight.gate }}{% else %}No info{% endif %}</td>
-                        <td>{% if flight.checkIn %}{{ flight.checkIn }}{% else %}No info{% endif %}/{% if flight.bagsCheckIn %}{{ flight.bagsCheckIn }}{% else %}No info{% endif %}</td>
+                        <td>{% if flight.checkIn %}{{ flight.checkIn|date }}{% else %}No info{% endif %}/{% if flight.bagsCheckIn %}{{ flight.bagsCheckIn|date }}{% else %}No info{% endif %}</td>
                         <td>
                             <a href="">
                                 <button class="btn-fill-warning">&raquo;</button>

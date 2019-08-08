@@ -83,7 +83,7 @@ class FlightController extends BaseController
     }
 
     /**
-     * @Route("/findOne", name="search_flight", methods={"GET"})
+     * @Route("/route", name="search_flight", methods={"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *
      * @param Request $request
@@ -94,9 +94,21 @@ class FlightController extends BaseController
         $flightNumber = $request->get('flight');
         $flights = $this->flightService->getByFlightNumber($flightNumber);
         if (!$flights || count($flights) === 0) {
-            $this->addFlash('warning', 'No route with the flight number ' . $flightNumber);
+            $this->addFlash('warning', 'No route with the flight number "' . $flightNumber . '"');
             return $this->redirectToRoute('admin_panel');
         }
         return $this->render('flight/admin.html.twig', ['flights' => $flights]);
+    }
+
+    /**
+     * @Route("/{id}", name="flight_details", methods={"GET"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function detailsView(int $id)
+    {
+        return $this->render('flight/details.html.twig', ['flight' => $this->flightService->getById($id)]);
     }
 }

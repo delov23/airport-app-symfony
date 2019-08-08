@@ -17,4 +17,6 @@ interface FlightServiceInterface
     public function getByType(string $type): ?array;
 
     public function getByFlightNumber($id): ?array;
+
+    public function getById(int $id): ?Flight;
 }

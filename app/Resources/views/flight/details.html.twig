@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Flight {{ flight.route.id }}
+{% endblock %}
+
+{% block main %}
+    <main class="main-section">
+        <h1 class="text-center fancy-text">Flight {{ flight.route.flightNumber }} on {{ flight.date|date }}</h1>
+        <h2 id="company" class="text-center">Operated by: {{ flight.route.company }} with {{ flight.route.seats - flight.seatsTaken }} seats left</h2>
+        <div class="text-center margin-top">
+            <img class="shadow-img" width="50%" src="{{ vich_uploader_asset(flight.route, 'image') }}" alt="">
+        </div>
+        <div class="columns text-center margin-top">
+            <div class="column">
+                <h2>{{ flight.route.fromAirport }} (Gate: {% if flight.gate %}{{ flight.gate }}{% else %}n/a{% endif %})</h2>
+            </div>
+            <div class="column" style="display: flex; justify-content: center">
+                <img src="http://cdn.onlinewebfonts.com/svg/img_546889.png"
+                     width="30vw" alt="">
+            </div>
+            <div class="column">
+                <h2>{{ flight.route.toAirport }}</h2>
+            </div>
+        </div>
+        <div class="columns text-center">
+            <div class="column"><h3>{{ flight.route.duration }} hours</h3></div>
+        </div>
+        <div class="margin-top columns text-center">
+            <div class="column"><h3>{{ flight.progress.event }} {{ flight.progressTime }}</h3></div>
+        </div>
+        <div class="margin-top columns text-center">
+            <div class="column"><h3>Check in until: {% if flight.checkIn %}{{ flight.checkIn|date }}{% else %}n/a{% endif %}</h3></div>
+            <div class="column"><h3>Check in bags until: {% if flight.bagsCheckIn %}{{ flight.bagsCheckIn|date }}{% else %}n/a{% endif %}</h3></div>
+        </div>
+    </main>
+{% endblock %}
+

@@ -47,6 +47,9 @@
                     </div>
                     <div class="column text-center">
                         <h2>Flights Management</h2>
+                        {% for message in app.session.flashbag.get('warning') %}
+                            <p class="error-msg">{{ message }}</p>
+                        {% endfor %}
                         <div class="search text-center">
                             <form action="{{ path('search_flight') }}" method="get">
                                 <input style="width: 80%" type="text" name="flight"

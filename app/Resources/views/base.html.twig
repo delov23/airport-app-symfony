@@ -8,9 +8,6 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/site.css') }}">
         <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-        <style>
-
-        </style>
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
@@ -28,6 +25,9 @@
         <nav>
             <ul class="nav-links">
                 <li><a class="nav-link" href="{{ path('flight_schedule') }}">Arrivals & Departures</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a class="nav-link" href="{{ path('admin_panel') }}">Admin Panel</a></li>
+                {% endif %}
                 {% if app.user is null %}
                     <li><a class="nav-link" href="{{ path('security_login') }}">Login</a></li>
                     <li><a class="nav-link" href="{{ path('user_register') }}">Register</a></li>
