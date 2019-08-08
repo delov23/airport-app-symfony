@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 abstract class AbstractService
 {
+    const PLOVDIV_AIRPORT = 'PDV';
+
     protected $em;
 
     protected $encoder;

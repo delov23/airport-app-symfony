@@ -27,8 +27,7 @@
         </a>
         <nav>
             <ul class="nav-links">
-                <li><a class="nav-link" href="#">Arrivals</a></li>
-                <li><a class="nav-link" href="#">Departures</a></li>
+                <li><a class="nav-link" href="{{ path('flight_schedule') }}">Arrivals & Departures</a></li>
                 {% if app.user is null %}
                     <li><a class="nav-link" href="{{ path('security_login') }}">Login</a></li>
                     <li><a class="nav-link" href="{{ path('user_register') }}">Register</a></li>

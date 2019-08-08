@@ -87,10 +87,10 @@ class Flight
     private $progressTime;
 
     /**
-     * @var Progress|null
+     * @var Progress
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Progress")
-     * @ORM\JoinColumn(name="progress_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="progress_id", referencedColumnName="id")
      */
     private $progress;
 

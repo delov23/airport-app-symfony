@@ -19,27 +19,24 @@
                 </div>
 
                 <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000" class="intro-controls">
-                    <a href="{{ path('flight_schedule', {type: 'arrivals'}) }}">
-                        <button class="btn-fill">Arrivals</button>
-                    </a>
-                    <a href="{{ path('flight_schedule', {type: 'departures'}) }}">
-                        <button class="btn-fill">Departures</button>
+                    <a href="{{ path('flight_schedule') }}">
+                        <button class="btn-fill btn-full-landing">Departures & Arrivals</button>
                     </a>
                 </div>
                 <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
                     {% if app.user is null %}
                         <a href="{{ path('user_register') }}">
-                            <button class="btn-fill" style="width: 304px;">Sign up</button>
+                            <button class="btn-fill btn-full-landing">Sign up</button>
                         </a>
                     {% else %}
                         <a href="{{ path('index') }}">
-                            <button class="btn-fill" style="width: 304px;">(TODO) Book a flight + Repair js</button>
+                            <button class="btn-fill btn-full-landing">(TODO) Book a flight + Repair js</button>
                         </a>
                     {% endif %}
                 </div>
                 <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
-                    <a href="{{ path('index') }}">
-                        <button class="btn-fill" style="width: 304px;">Explore routes</button>
+                    <a href="{{ path('all_routes') }}">
+                        <button class="btn-fill btn-full-landing">Explore routes</button>
                     </a>
                 </div>
             </div>

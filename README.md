@@ -22,8 +22,8 @@
 - View All ✅
 - Delete -> make inactive
 3. Flight 
-- C ✅, R, U 
-- View Departures/Arrivals 
+- C ✅, R, U
+- View Departures/Arrivals ✅
 - Search for flight and make a reservation 
 - Delete -> make completed
 4. Reservation 

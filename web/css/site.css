@@ -82,6 +82,10 @@ nav {
     width: 25vw !important;
 }
 
+.btn-full-landing {
+    width: 304px !important;
+}
+
 .btn-fill {
     width: 150px;
     height: 50px;

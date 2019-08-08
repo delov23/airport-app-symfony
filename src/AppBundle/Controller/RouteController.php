@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Route as RouteEntity;
 use AppBundle\Form\RouteType;
 use AppBundle\Service\Route\RouteServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +28,7 @@ class RouteController extends BaseController
 
     /**
      * @Route("/create", name="route_create", methods={"GET"})
+     * @Security("has_role('ROLE_ADMIN')")
      *
      * @return Response
      */
@@ -37,6 +39,7 @@ class RouteController extends BaseController
 
     /**
      * @Route("/create", methods={"POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      *
      * @param Request $request
      * @return Response

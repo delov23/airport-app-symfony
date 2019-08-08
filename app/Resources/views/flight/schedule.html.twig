@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Schedule
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/flights.css') }}">
+{% endblock %}
+{% block main %}
+    <main>
+        <section class="weather">
+            <div class="weather-data">
+                <h2>Current weather in Plovdiv</h2>
+                <h3 id="weather-data">Getting Data...</h3>
+            </div>
+            <img width="80px" height="80px" id="weather-img" src="" alt="Loading...">
+        </section>
+        <section class="departures">
+            <div class="flights-header">
+                <h1>Departures</h1>
+                <input id="departing" type="text" placeholder="🔍 Search for a departing flight">
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Flight No.</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="departures-data">
+                    {% for flight in departures %}
+                    <tr data-id="{{ flight.route.flightNumber }}-{{ flight.route.toAirport }}">
+                        <td>{{ flight.route.flightNumber }}</td>
+                        <td>{{ flight.route.fromAirport }}</td>
+                        <td>{{ flight.route.toAirport }}</td>
+                        <td>{{ flight.progress.event }} {{ flight.progressTime }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="arrivals" id="arrivals">
+            <div class="flights-header">
+                <h1>Arrivals</h1>
+                <input id="arriving" type="text" placeholder="🔍 Search for an arriving flight">
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Flight No.</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="arrivals-data">
+                    {% for flight in arrivals %}
+                        <tr data-id="{{ flight.route.flightNumber }}-{{ flight.route.fromAirport }}">
+                            <td>{{ flight.route.flightNumber }}</td>
+                            <td>{{ flight.route.fromAirport }}</td>
+                            <td>{{ flight.route.toAirport }}</td>
+                            <td>{{ flight.progress.event }} {{ flight.progressTime }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/flights.js') }}"></script>
+{% endblock %}
+

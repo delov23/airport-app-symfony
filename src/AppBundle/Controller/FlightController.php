@@ -5,7 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Flight;
 use AppBundle\Form\FlightType;
 use AppBundle\Service\Flight\FlightServiceInterface;
+use AppBundle\Service\Progress\ProgressServiceInterface;
 use AppBundle\Service\Route\RouteServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,25 +28,35 @@ class FlightController extends BaseController
      */
     private $flightService;
 
+    /**
+     * @var ProgressServiceInterface
+     */
+    private $progressService;
 
-    public function __construct(RouteServiceInterface $routeService, FlightServiceInterface $flightService)
+
+    public function __construct(RouteServiceInterface $routeService, FlightServiceInterface $flightService, ProgressServiceInterface $progressService)
     {
         $this->routeService = $routeService;
         $this->flightService = $flightService;
+        $this->progressService = $progressService;
     }
 
     /**
-     * @Route("/schedule/{type}", requirements={"type"="departures|arrivals"}, name="flight_schedule", methods={"GET"})
+     * @Route("/schedule", name="flight_schedule", methods={"GET"})
      *
-     * @param $type string
      * @return Response
      */
-    public function scheduleView($type)
+    public function scheduleView()
     {
+        return $this->render('flight/schedule.html.twig', [
+            'departures' => $this->flightService->getByType('departures'),
+            'arrivals' => $this->flightService->getByType('arrivals')
+        ]);
     }
 
     /**
      * @Route("/create", name="flight_create", methods={"GET"})
+     * @Security("has_role('ROLE_ADMIN')")
      *
      * @return Response
      */
@@ -55,6 +68,7 @@ class FlightController extends BaseController
 
     /**
      * @Route("/create", methods={"POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      *
      * @param Request $request
      * @return Response
@@ -62,7 +76,8 @@ class FlightController extends BaseController
     public function createProcess(Request $request)
     {
         return $this->verifyEntity(FlightType::class, 'flight', new Flight(), $request, 'flight/create.html.twig',
-            function ($flight) {
+            function (Flight $flight) {
+                $flight->setProgress($this->progressService->getById(1));
                 $this->flightService->create($flight);
             }, 'index', ['routes' => $this->routeService->getAll()]);
     }

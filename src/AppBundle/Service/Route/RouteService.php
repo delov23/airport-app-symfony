@@ -4,6 +4,7 @@
 namespace AppBundle\Service\Route;
 
 use AppBundle\Entity\Route;
+use AppBundle\Repository\FlightRepository;
 use AppBundle\Repository\RouteRepository;
 use AppBundle\Service\AbstractService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,5 +41,15 @@ class RouteService extends AbstractService implements RouteServiceInterface
         /** @var $route Route */
         $route = $this->routeRepository->find($id);
         return $route;
+    }
+
+    public function getAllDepartures(): array
+    {
+        return $this->routeRepository->findBy(['fromAirport' => self::PLOVDIV_AIRPORT]);
+    }
+
+    public function getAllArrivals(): array
+    {
+        return $this->routeRepository->findBy(['toAirport' => self::PLOVDIV_AIRPORT]);
     }
 }

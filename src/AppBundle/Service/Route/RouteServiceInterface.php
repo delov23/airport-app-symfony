@@ -16,4 +16,15 @@ interface RouteServiceInterface
     public function getAll(): ?array;
 
     public function getById($id): ?Route;
+
+    /**
+     * @return Route[]
+     */
+    public function getAllDepartures(): array;
+
+    /**
+     * @return Route[]
+     */
+    public function getAllArrivals(): array;
+
 }

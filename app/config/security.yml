@@ -11,6 +11,8 @@ security:
         secured_area:
             pattern: ^/
 
+            access_denied_handler: AppBundle\Service\Security\AccessDenied
+
             anonymous: true
 
             form_login:
