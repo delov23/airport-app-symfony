@@ -15,4 +15,6 @@ interface FlightServiceInterface
      * @return Flight[]|null
      */
     public function getByType(string $type): ?array;
+
+    public function getByFlightNumber($id): ?array;
 }

@@ -40,6 +40,7 @@ class FlightRepository extends EntityRepository
                 ->getQuery()
                 ->getResult();
         } else if ($type === 'departures') {
+            // TODO ADD DATE
             return $this->createQueryBuilder('f')
                 ->select('f')
                 ->addSelect('r')
@@ -50,5 +51,18 @@ class FlightRepository extends EntityRepository
         } else {
             return null;
         }
+    }
+
+    public function findByFlightNumber($id): ?array
+    {
+        return $this
+            ->createQueryBuilder('f')
+            ->select('f')
+            ->addSelect('r')
+            ->join('f.route', 'r')
+            ->where('r.flightNumber = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
     }
 }

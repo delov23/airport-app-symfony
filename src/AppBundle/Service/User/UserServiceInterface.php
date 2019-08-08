@@ -11,4 +11,6 @@ interface UserServiceInterface
     public function register(User $user): void;
 
     public function getById(int $id): ?User;
+
+    public function getAll(): ?array;
 }

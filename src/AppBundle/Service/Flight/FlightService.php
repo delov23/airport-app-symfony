@@ -40,4 +40,13 @@ class FlightService extends AbstractService implements FlightServiceInterface
     {
         return $this->flightRepository->findByType($type);
     }
+
+    /**
+     * @param $id
+     * @return Flight[]|null
+     */
+    public function getByFlightNumber($id): ?array
+    {
+        return $this->flightRepository->findByFlightNumber($id);
+    }
 }

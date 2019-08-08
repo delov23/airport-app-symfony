@@ -53,7 +53,8 @@ table td, table th {
     justify-content: space-between;
 }
 
-.flights-header input {
+.flights-header input,
+.search input {
     height: 6vh;
     width: 40vw;
     border: 2px solid #54a0ff;
@@ -62,7 +63,8 @@ table td, table th {
     margin-bottom: 5px;
 }
 
-.flights-header input::placeholder {
+.flights-header input::placeholder,
+.search input::placeholder {
     font-size: 18px;
     color: rgba(44, 44, 44, 0.5);
 }

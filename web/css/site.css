@@ -97,7 +97,61 @@ nav {
     margin-bottom: 5px;
 }
 
+.btn-fill-warning {
+    width: 150px;
+    height: 50px;
+    border: 2px solid transparent;
+    background: #ffd042;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin-bottom: 5px;
+}
+
+.btn-fill-danger {
+    width: 150px;
+    height: 50px;
+    border: 2px solid transparent;
+    background: #ff4f56;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin-bottom: 5px;
+}
+
+.more-info {
+    height: 50px;
+    border: 2px solid transparent;
+    background: #54a0ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 5px;
+    width: 50px;
+}
+
 .btn-fill:hover {
+    border: 2px solid #54a0ff;
+    transition: ease-in-out 0.2s;
+    background: white;
+    color: #54a0ff;
+}
+
+.btn-fill-warning:hover {
+    border: 2px solid #ffd042;
+    transition: ease-in-out 0.2s;
+    background: white;
+    color: #ffd042;
+}
+
+.btn-fill-danger:hover {
+    border: 2px solid #ff4f56;
+    transition: ease-in-out 0.2s;
+    background: white;
+    color: #ff4f56;
+}
+
+.more-info:hover {
     border: 2px solid #54a0ff;
     transition: ease-in-out 0.2s;
     background: white;

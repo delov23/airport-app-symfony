@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    ADMIN FLIGHTS
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/flights.css') }}">
+{% endblock %}
+
+{% block main %}
+    <main class="main-section">
+        <div class="flights-header">
+            <h1>Flight {{ flights[0].route.flightNumber }} from {{ flights[0].route.fromAirport }} to {{ flights[0].route.toAirport }}</h1>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Seats - all/taken</th>
+                    <th>Progress</th>
+                    <th>Info - terminal/gate</th>
+                    <th>Check-in - person/luggage</th>
+                    <th>Add details</th>
+                    <th>Complete</th>
+                </tr>
+                </thead>
+
+                <tbody id="departures-data">
+                {% for flight in flights %}
+                    <tr>
+                        <td>{{ flight.date|date }}</td>
+                        <td>{{ flight.route.seats }}/{{ flight.seatsTaken }}</td>
+                        <td>{{ flight.progress.event }} {{ flight.progressTime }}</td>
+                        <td>{{ flight.terminal }}/{% if flight.gate %}{{ flight.gate }}{% else %}No info{% endif %}</td>
+                        <td>{% if flight.checkIn %}{{ flight.checkIn }}{% else %}No info{% endif %}/{% if flight.bagsCheckIn %}{{ flight.bagsCheckIn }}{% else %}No info{% endif %}</td>
+                        <td>
+                            <a href="">
+                                <button class="btn-fill-warning">&raquo;</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="">
+                                <button class="btn-fill-danger">&raquo;</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}
+

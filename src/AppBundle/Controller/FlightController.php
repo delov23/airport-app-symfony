@@ -81,4 +81,22 @@ class FlightController extends BaseController
                 $this->flightService->create($flight);
             }, 'index', ['routes' => $this->routeService->getAll()]);
     }
+
+    /**
+     * @Route("/findOne", name="search_flight", methods={"GET"})
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function findOneRedirect(Request $request)
+    {
+        $flightNumber = $request->get('flight');
+        $flights = $this->flightService->getByFlightNumber($flightNumber);
+        if (!$flights || count($flights) === 0) {
+            $this->addFlash('warning', 'No route with the flight number ' . $flightNumber);
+            return $this->redirectToRoute('admin_panel');
+        }
+        return $this->render('flight/admin.html.twig', ['flights' => $flights]);
+    }
 }

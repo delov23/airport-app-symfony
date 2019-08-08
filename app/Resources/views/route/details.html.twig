@@ -26,6 +26,18 @@
         <div class="columns text-center">
             <div class="column"><h3>{{ route.duration }} hours</h3></div>
         </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="columns">
+                <div class="column text-center">
+                    <a href="">
+                        <button class="btn-fill-warning">Edit route</button>
+                    </a>
+                    <a href="">
+                        <button class="btn-fill-danger">Make inactive</button>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
     </main>
 {% endblock %}
 

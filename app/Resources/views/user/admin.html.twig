@@ -1,25 +1,93 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-ADMIN PANEL
+    ADMIN PANEL
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/flights.css') }}">
 {% endblock %}
 
 {% block main %}
-    <div class="columns margin-top">
-        <div class="column">
-            <h1 class="text-center">Admin Panel</h1>
-            <div class="columns">
-                <div class="column text-center">
-                    <h2>Routes Management</h2>
-                </div>
-                <div class="column text-center">
-                    <h2>Flights Management</h2>
-                </div>
-                <div class="column text-center">
-                    <h2>Users Management</h2>
+    <main class="main-section">
+        <div class="columns margin-top">
+            <div class="column">
+                <h1 class="text-center fancy-text">Admin Panel</h1>
+                <div class="columns">
+                    <div class="column text-center">
+                        <h2>Routes Management</h2>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Route Code</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Manage</th>
+                                </tr>
+                                </thead>
+
+                                <tbody id="departures-data">
+                                {% for route in routes %}
+                                    <tr>
+                                        <td>{{ route.flightNumber }}</td>
+                                        <td>{{ route.fromAirport }}</td>
+                                        <td>{{ route.toAirport }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ path('route_details', {id: route.flightNumber}) }}">
+                                                <button class="more-info">&raquo;</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="column text-center">
+                        <h2>Flights Management</h2>
+                        <div class="search text-center">
+                            <form action="{{ path('search_flight') }}" method="get">
+                                <input style="width: 80%" type="text" name="flight"
+                                       placeholder="🔍 Search for a flight by route code"/>
+                                <button type="submit" class="btn-fill">Go</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="column text-center">
+                        <h2>Users Management</h2>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Email</th>
+                                    <th>Manage</th>
+                                </tr>
+                                </thead>
+
+                                <tbody id="departures-data">
+                                {% for user in users %}
+                                    <tr>
+                                        <td class="text-center">
+                                            <img class="shadow-img" style="width: 45%"
+                                                 src="{{ vich_uploader_asset(user, 'image') }}" alt="">
+                                        </td>
+                                        <td>{{ user.email }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ path('user_profile', {id: user.id}) }}">
+                                                <button class="more-info">&raquo;</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 {% endblock %}
-

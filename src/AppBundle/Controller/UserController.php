@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use AppBundle\Service\Route\RouteServiceInterface;
 use AppBundle\Service\User\UserServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,10 +21,13 @@ class UserController extends BaseController
      */
     private $userService;
 
+    private $routeService;
 
-    public function __construct(UserServiceInterface $userService)
+
+    public function __construct(UserServiceInterface $userService, RouteServiceInterface $routeService)
     {
         $this->userService = $userService;
+        $this->routeService = $routeService;
     }
 
     /**
@@ -76,6 +80,9 @@ class UserController extends BaseController
      */
     public function adminPanelView()
     {
-        return $this->render('user/admin.html.twig');
+        return $this->render('user/admin.html.twig', [
+            'routes' => $this->routeService->getAll(),
+            'users' => $this->userService->getAll()
+        ]);
     }
 }

@@ -46,4 +46,12 @@ class UserService extends AbstractService implements UserServiceInterface
         $user = $this->userRepository->find($id);
         return $user;
     }
+
+    /**
+     * @return User[]|null
+     */
+    public function getAll(): ?array
+    {
+        return $this->userRepository->findAll();
+    }
 }
