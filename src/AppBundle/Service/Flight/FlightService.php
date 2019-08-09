@@ -5,6 +5,7 @@ namespace AppBundle\Service\Flight;
 
 
 use AppBundle\Entity\Flight;
+use AppBundle\Entity\Search;
 use AppBundle\Repository\FlightRepository;
 use AppBundle\Service\AbstractService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,5 +56,10 @@ class FlightService extends AbstractService implements FlightServiceInterface
         /** @var Flight|null $flight */
         $flight = $this->flightRepository->find($id);
         return $flight;
+    }
+
+    public function search(Search $search): ?Flight
+    {
+        return $this->flightRepository->search($search);
     }
 }

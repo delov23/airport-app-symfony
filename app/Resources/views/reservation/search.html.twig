@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search for a reservation{% endblock %}
+
+{% block main %}
+    <main>
+        <section class="form-wrapper" data-aos="fade-down">
+            <form id="form" name="rs" action="{{ path('reservation_search') }}" method="post" enctype="multipart/form-data">
+                <div class="form" id="animate">
+                    <div class="form-header">
+                        <div class="a-form-section">
+                            <h3 class="text-center">RESERVATION DETAILS</h3>
+                            {% if error is defined %}
+                                <p class="error-msg text-center">{{ error }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-content">
+                        <div class="form-group">
+                            <input type="date" placeholder="Date" name="date" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" placeholder="From Airport" name="fromAirport" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" placeholder="To Airport" name="toAirport" />
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('rs') }}">
+
+                        <div class="form-group text-center">
+                            <button id="test-btn" type="submit" class="btn-fill">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+{% endblock %}

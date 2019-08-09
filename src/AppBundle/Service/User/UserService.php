@@ -54,4 +54,10 @@ class UserService extends AbstractService implements UserServiceInterface
     {
         return $this->userRepository->findAll();
     }
+
+    public function edit(User $user): void
+    {
+        $this->em->merge($user);
+        $this->em->flush();
+    }
 }

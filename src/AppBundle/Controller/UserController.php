@@ -85,4 +85,39 @@ class UserController extends BaseController
             'users' => $this->userService->getAll()
         ]);
     }
+
+    /**
+     * @Route("/edit", name="user_edit", methods={"GET"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     *
+     * @return Response
+     */
+    public function editView()
+    {
+        $user = $this->getUser();
+        return $this->render('user/edit.html.twig', [
+            'form' => $this->createForm(UserType::class, $user)->remove('image')->remove('email')->remove('password')->createView(),
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/edit", methods={"POST"})
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function editProcess(Request $request)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user);
+        $form->remove('email')->remove('password')->remove('image');
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $this->userService->edit($user);
+            return $this->redirectToRoute('user_profile');
+        } else {
+            return $this->render('user/edit.html.twig', ['errors' => $this->mapErrors($form->getErrors(true)), 'form' => $form, 'user' => $user]);
+        }
+    }
 }

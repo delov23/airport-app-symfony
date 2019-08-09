@@ -7,7 +7,6 @@ use AppBundle\Form\FlightType;
 use AppBundle\Service\Flight\FlightServiceInterface;
 use AppBundle\Service\Progress\ProgressServiceInterface;
 use AppBundle\Service\Route\RouteServiceInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

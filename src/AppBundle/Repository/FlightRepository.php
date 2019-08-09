@@ -3,10 +3,15 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Flight;
+use AppBundle\Entity\Search;
 use AppBundle\Service\Route\RouteServiceInterface;
+use DateInterval;
+use DateTime;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Exception;
 
 /**
  * FlightRepository
@@ -28,29 +33,29 @@ class FlightRepository extends EntityRepository
     /**
      * @param string $type
      * @return Flight[]|null
+     * @throws Exception
      */
     public function findByType(string $type)
     {
+        $start = new DateTime('-1 day');
+        $end = new DateTime('1 day');
+        $qb = $this->createQueryBuilder('f')
+            ->select('f')
+            ->addSelect('r')
+            ->join('f.route', 'r');
         if ($type === 'arrivals') {
-            return $this->createQueryBuilder('f')
-                ->select('f')
-                ->addSelect('r')
-                ->join('f.route', 'r')
-                ->where("r.toAirport = 'PDV'")
-                ->getQuery()
-                ->getResult();
+            $qb->where("r.toAirport = 'PDV'");
         } else if ($type === 'departures') {
-            // TODO ADD DATE
-            return $this->createQueryBuilder('f')
-                ->select('f')
-                ->addSelect('r')
-                ->join('f.route', 'r')
-                ->where("r.fromAirport = 'PDV'")
-                ->getQuery()
-                ->getResult();
+            $qb->where("r.fromAirport = 'PDV'");
         } else {
             return null;
         }
+        $qb
+            ->andWhere('f.date > :start')
+            ->andWhere('f.date < :end')
+            ->setParameter('start', $start, Type::DATETIME)
+            ->setParameter('end', $end, Type::DATETIME);
+        return $qb->getQuery()->getResult();
     }
 
     public function findByFlightNumber($id): ?array
@@ -64,5 +69,26 @@ class FlightRepository extends EntityRepository
             ->setParameter('id', $id)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param Search $search
+     * @return Flight|null
+     */
+    public function search(Search $search)
+    {
+        try {
+            return $this->createQueryBuilder('f')
+                ->select('f')
+                ->addSelect('r')
+                ->join('f.route', 'r')
+                ->andWhere('r.fromAirport = :fromAirport')
+                ->andWhere('r.toAirport = :toAirport')
+                ->setParameters(['fromAirport' => $search->getFromAirport(), 'toAirport' => $search->getToAirport()])
+                ->getQuery()
+                ->getSingleResult();
+        } catch (Exception $e) {
+            return null;
+        }
     }
 }

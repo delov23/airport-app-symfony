@@ -81,18 +81,9 @@ class User implements UserInterface, Serializable
      */
     private $roles;
 
-    /**
-     * @var Reservation[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="user")
-     */
-    private $reservations;
-
-
     public function __construct()
     {
         $this->roles = new ArrayCollection();
-        $this->reservations = new ArrayCollection();
     }
 
     /**
@@ -267,24 +258,6 @@ class User implements UserInterface, Serializable
         return $this;
     }
 
-    /**
-     * @return Reservation[]|ArrayCollection
-     */
-    public function getReservations()
-    {
-        return $this->reservations;
-    }
-
-    /**
-     * @param Reservation[]|ArrayCollection $reservations
-     * @return User
-     */
-    public function setReservations($reservations)
-    {
-        $this->reservations = $reservations;
-        return $this;
-    }
-
     public function hasRole(string $role)
     {
         return in_array($role, $this->getRoles());
@@ -318,7 +291,6 @@ class User implements UserInterface, Serializable
             $this->title,
             $this->fullName,
             $this->roles,
-            $this->reservations,
             $this->imageName
         ]);
     }
@@ -332,7 +304,6 @@ class User implements UserInterface, Serializable
             $this->title,
             $this->fullName,
             $this->roles,
-            $this->reservations,
             $this->imageName,
             ) = unserialize($serialized);
     }

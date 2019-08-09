@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block main %}
+    <main>
+        <section class="form-wrapper" data-aos="fade-down">
+            <form id="form" name="editUser" action="{{ path('user_edit') }}" method="post" enctype="multipart/form-data">
+                <div class="form" id="animate">
+                    <div class="form-header">
+                        <a href="{{ path('user_edit') }}" class="a-form-section">
+                            <h3 class="text-center">EDIT PROFILE</h3>
+                        </a>
+                    </div>
+                    <div class="form-content">
+                        <div class="form-group-2">
+                            <input class="small" type="text" placeholder="Title" name="user[title]"
+                                   value="{{ user.title }}"/>
+                            <input class="large" type="text" placeholder="Name" name="user[fullName]"
+                                   value="{{ user.fullName }}"/>
+                        </div>
+                        <p class="error-msg">{% if errors.title is defined %}{{ errors.title|join('. ') }}{% endif %}</p>
+                        <p class="error-msg">{% if errors.fullName is defined %}{{ errors.fullName|join('. ') }}{% endif %}</p>
+
+                        <div class="form-group text-center">
+                            <a href="#">
+                                <button type="button" class="btn-wide btn-fill-danger">Request Password Change</button>
+                            </a>
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('editUser') }}" />
+
+                        <div class="form-group text-center">
+                            <button id="test-btn" type="submit" class="btn-fill">Ready</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+{% endblock %}

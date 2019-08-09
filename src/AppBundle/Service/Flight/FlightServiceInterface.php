@@ -5,6 +5,7 @@ namespace AppBundle\Service\Flight;
 
 
 use AppBundle\Entity\Flight;
+use AppBundle\Entity\Search;
 
 interface FlightServiceInterface
 {
@@ -19,4 +20,6 @@ interface FlightServiceInterface
     public function getByFlightNumber($id): ?array;
 
     public function getById(int $id): ?Flight;
+
+    public function search(Search $search): ?Flight;
 }

@@ -22,7 +22,7 @@
 - View All ✅
 - Delete -> make inactive
 3. Flight 
-- C ✅, R, U
+- C ✅, R ✅, U
 - View Departures/Arrivals ✅
 - Search for flight and make a reservation 
 - Delete -> make completed
@@ -32,16 +32,4 @@
 
 ## Things to check out
 - Security:
-```
-    /**
-     * @Security("is_granted('ROLE_USER') 
-     * and 
-     * is_granted('POST_SHOW', subject="post")")
-     * POST_SHOW -> Voter
-     */
-    public function viewPost()
-    {
-
-    }
-```
 https://symfony.com/doc/3.4/security/voters.html
