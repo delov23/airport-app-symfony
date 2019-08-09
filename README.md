@@ -28,20 +28,29 @@
 - Long id (Authentication string), expiry date and user_id (string id put as query)
 
 ## Finalisation of the project
-- Password Change
+1. Final things to do
 - Favorite Flight ✅
 - Add labels on forms ✅
 - Check if one of the airports is PLV
 - Make the fields full names -> PLV to Plovdiv Airport
+- UN-star at profile ✅
+- Select menus -> selected attr ✅
+
+2. Bonus Functionality
+- Password Change
+- USER_EMPLOYEE
+
+3. Assertion
 - Verify that an entity exists
 - Verify that seatsTaken <= seatsAll ✅
-- UN-star at profile ✅
 - Constraints!!! - Custom messages
+
+4. Checks
 - Final checks - be aware of dates, constraints and security
+- TEST THE SITE WITH: Unauthenticated people, USER_ROLE people and USER_ADMIN
+
+5. Code quality
 - Improve code quality
 - If time, improve form rendering (a lot repeating)
-- ?USER_EMPLOYEE
-- TEST THE SITE WITH: Unauthenticated people, USER_ROLE people and USER_ADMIN
-- Functions out of the controllers -> callbacks
+- Functions out of the controller functions -> callbacks
 - Split logic into an Admin Controller ✅
-- Select menus -> selected attr ✅
