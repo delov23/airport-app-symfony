@@ -77,20 +77,6 @@ class UserController extends BaseController
     }
 
     /**
-     * @Route("/admin", methods={"GET"}, name="admin_panel")
-     * @Security("has_role('ROLE_ADMIN')")
-     *
-     * @return Response
-     */
-    public function adminPanelView()
-    {
-        return $this->render('user/admin.html.twig', [
-            'routes' => $this->routeService->getAll(),
-            'users' => $this->userService->getAll()
-        ]);
-    }
-
-    /**
      * @Route("/edit", name="user_edit", methods={"GET"})
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
@@ -126,22 +112,4 @@ class UserController extends BaseController
             return $this->render('user/edit.html.twig', ['errors' => $this->mapErrors($form->getErrors(true)), 'form' => $form->createView(), 'user' => $user]);
         }
     }
-
-    /**
-     * @Route("/admin/make/{id}", methods={"POST"}, name="make_admin")
-     * @Security("has_role('ROLE_ADMIN')")
-     *
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function makeAdminProcess(Request $request, $id)
-    {
-        $user = $this->userService->getById($id);
-        $user->addRole($this->roleService->findByName('ROLE_ADMIN'));
-        $this->userService->edit($user);
-        return $this->redirectToRoute('admin_panel');
-    }
-
-
 }

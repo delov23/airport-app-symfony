@@ -42,6 +42,6 @@
 - If time, improve form rendering (a lot repeating)
 - ?USER_EMPLOYEE
 - TEST THE SITE WITH: Unauthenticated people, USER_ROLE people and USER_ADMIN
-- Functions out of the controllers
-- Split logic into an Admin Controller
-- Select menus -> selected attr
+- Functions out of the controllers -> callbacks
+- Split logic into an Admin Controller ✅
+- Select menus -> selected attr ✅

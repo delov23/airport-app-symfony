@@ -18,7 +18,7 @@
                             <select id="route" name="flight[route]">
                                 <option value="" selected disabled>Route ...</option>
                                 {% for route in routes %}
-                                    <option value="{{ loop.index - 1 }}">{{ route.flightNumber }} - {{ route.fromAirport }} -> {{ route.toAirport }}</option>
+                                    <option {% if flight.route.id is defined and route.id == flight.route.id %}selected{% endif %} value="{{ loop.index - 1 }}">{{ route.flightNumber }} - {{ route.fromAirport }} -> {{ route.toAirport }}</option>
                                 {% endfor %}
                             </select>
                             <p class="error-msg">{% if errors.route is defined %}{{ errors.route|join(' ') }}{% endif %}</p>

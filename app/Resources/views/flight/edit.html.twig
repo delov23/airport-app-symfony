@@ -54,7 +54,7 @@
                             <select id="progress" name="flight_details[progress]">
                                 <option value="" selected disabled>Update progress</option>
                                 {% for progress in progressTypes %}
-                                    <option value="{{ loop.index - 1 }}">{{ progress.event }}</option>
+                                    <option {% if flight.progress.id is defined and progress.id == flight.progress.id %}selected{% endif %} value="{{ loop.index - 1 }}">{{ progress.event }}</option>
                                 {% endfor %}
                             </select>
                             <p class="error-msg">{% if errors.progress is defined %}{{ errors.progress|join(' ') }}{% endif %}</p>

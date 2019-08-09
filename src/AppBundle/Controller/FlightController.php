@@ -102,11 +102,10 @@ class FlightController extends BaseController
     public function editView($id)
     {
         $flight = $this->flightService->getById($id);
-        return $this->render('flight/edit.html.twig', [
-            'form' => $this->createForm(FlightDetailsType::class, $flight)->createView(),
-            'flight' => $flight,
-            'progressTypes' => $this->progressService->getAll()
-        ]);
+        return $this->render('flight/edit.html.twig', array_merge(
+            $this->getFormArray(FlightDetailsType::class, $flight, 'flight'),
+            ['progressTypes' => $this->progressService->getAll()]
+        ));
     }
 
     /**
