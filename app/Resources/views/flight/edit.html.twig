@@ -49,8 +49,9 @@
                             <p class="error-msg">{% if errors.bagsCheckIn is defined %}{{ errors.bagsCheckIn|join(' ') }}{% endif %}</p>
                         </div>
 
+                        <div class="label-group"><label for="progress">Progress</label></div>
                         <div class="form-group">
-                            <select name="flight_details[progress]">
+                            <select id="progress" name="flight_details[progress]">
                                 <option value="" selected disabled>Update progress</option>
                                 {% for progress in progressTypes %}
                                     <option value="{{ loop.index - 1 }}">{{ progress.event }}</option>

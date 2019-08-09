@@ -179,14 +179,16 @@ class FlightController extends BaseController
      * @Route("/star/{id}", name="flight_star", methods={"GET"})
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
+     * @param Request $request
      * @param $id
      * @return Response
      */
-    public function star($id)
+    public function star(Request $request, $id)
     {
         /** @var User $user */
         $user = $this->getUser();
         $this->userService->toggleFlight($user, $this->flightService->getById($id));
-        return $this->redirectToRoute('flight_schedule');
+        $view = $request->get('redirectView') ? $request->get('redirectView') : 'flight_schedule';
+        return $this->redirectToRoute($view);
     }
 }

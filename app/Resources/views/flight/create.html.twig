@@ -13,8 +13,9 @@
                         </div>
                     </div>
                     <div class="form-content">
+                        <div class="label-group"><label for="route">Route</label></div>
                         <div class="form-group">
-                            <select name="flight[route]">
+                            <select id="route" name="flight[route]">
                                 <option value="" selected disabled>Route ...</option>
                                 {% for route in routes %}
                                     <option value="{{ loop.index - 1 }}">{{ route.flightNumber }} - {{ route.fromAirport }} -> {{ route.toAirport }}</option>
@@ -23,18 +24,21 @@
                             <p class="error-msg">{% if errors.route is defined %}{{ errors.route|join(' ') }}{% endif %}</p>
                         </div>
 
+                        <div class="label-group"><label for="date">Date</label></div>
                         <div class="form-group">
-                            <input type="datetime-local" placeholder="Date" name="flight[date]" value="{{ flight.date|date('Y-m-d\\TH:i') }}"/>
+                            <input id="date" type="datetime-local" placeholder="Date" name="flight[date]" value="{{ flight.date|date('Y-m-d\\TH:i') }}"/>
                             <p class="error-msg">{% if errors.date is defined %}{{ errors.date|join(' ') }}{% endif %}</p>
                         </div>
 
+                        <div class="label-group"><label for="price">Price</label></div>
                         <div class="form-group">
-                            <input type="number" step="2" placeholder="Price per normal seat" name="flight[price]" value="{{ flight.price }}"/>
+                            <input id="price" type="number" step="2" placeholder="Price per normal seat" name="flight[price]" value="{{ flight.price }}"/>
                             <p class="error-msg">{% if errors.price is defined %}{{ errors.price|join(' ') }}{% endif %}</p>
                         </div>
 
+                        <div class="label-group"><label for="terminal">Terminal</label></div>
                         <div class="form-group">
-                            <input type="text" placeholder="Terminal of departure" name="flight[terminal]" value="{{ flight.terminal }}"/>
+                            <input id="terminal" type="text" placeholder="Terminal of departure" name="flight[terminal]" value="{{ flight.terminal }}"/>
                             <p class="error-msg">{% if errors.terminal is defined %}{{ errors.terminal|join(' ') }}{% endif %}</p>
                         </div>
 

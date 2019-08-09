@@ -30,6 +30,7 @@
                             <th>Status</th>
                             <th>Check-in</th>
                             <th>Bags check-in</th>
+                            <th>Remove</th>
                         </tr>
                         </thead>
 
@@ -43,6 +44,11 @@
                                 <td>{{ flight.progress.event }} {{ flight.progressTime|date('H:i') }}</td>
                                 <td>{{ flight.checkIn|date('d.M - H:i') }}</td>
                                 <td>{{ flight.bagsCheckIn|date('d.M - H:i') }}</td>
+                                <td>
+                                    <a href="{{ path('flight_star', {id: flight.id, redirectView: 'user_profile'}) }}">
+                                        <button class="btn-fill-danger">&cross;</button>
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

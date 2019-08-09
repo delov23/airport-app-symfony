@@ -21,32 +21,42 @@
                                    placeholder="Profile Picture" name="route[image][file]"/>
                         </div>
 
+                        <div class="label-group"><label for="flightNumber">Flight Number</label></div>
                         <div class="form-group">
-                            <input type="text" placeholder="Flight Number Registration" name="route[flightNumber]"
+                            <input id="flightNumber" type="text" placeholder="Flight Number Registration" name="route[flightNumber]"
                                    value="{{ route.flightNumber }}"/>
                             <p class="error-msg">{% if errors.flightNumber is defined %}{{ errors.flightNumber|join(', ') }}{% endif %}</p>
                         </div>
 
+                        <div class="label-group">
+                            <label for="airportFrom">From airport</label>
+                            <label for="airportTo">To airport</label>
+                        </div>
                         <div class="form-group-2">
-                            <input type="text" placeholder="From (Airport Id)" name="route[fromAirport]"
+                            <input id="airportFrom" type="text" placeholder="From (Airport Id)" name="route[fromAirport]"
                                    value="{{ route.fromAirport }}"/>
-                            <input type="text" placeholder="To (Airport Id)" name="route[toAirport]"
+                            <input id="airportTo" type="text" placeholder="To (Airport Id)" name="route[toAirport]"
                                    value="{{ route.toAirport }}"/>
                         </div>
                         <p class="text-white">*Make sure that at least one of them is Plovdiv Airport [PLD]</p>
                         <p class="error-msg">{% if errors.fromAirport is defined %}{{ errors.fromAirport|join(', ') }}{% endif %}</p>
                         <p class="error-msg">{% if errors.toAirport is defined %}{{ errors.toAirport|join(', ') }}{% endif %}</p>
 
+                        <div class="label-group">
+                            <label for="company">Company</label>
+                            <label for="duration">Duration</label>
+                        </div>
                         <div class="form-group-2">
-                            <input type="text" placeholder="Company" name="route[company]" value="{{ route.company }}"/>
-                            <input type="text" placeholder="Duration (H:m)" name="route[duration]"
+                            <input id="company" type="text" placeholder="Company" name="route[company]" value="{{ route.company }}"/>
+                            <input id="duration" type="text" placeholder="Duration (H:m)" name="route[duration]"
                             value="{{ route.duration }}"/>
                         </div>
                         <p class="error-msg">{% if errors.duration is defined %}{{ errors.duration|join(', ') }}{% endif %}</p>
                         <p class="error-msg">{% if errors.company is defined %}{{ errors.company|join(', ') }}{% endif %}</p>
 
+                        <div class="label-group"><label for="seats">Seats</label></div>
                         <div class="form-group">
-                            <input type="number" placeholder="Seats" name="route[seats]" value="{{ route.seats }}"/>
+                            <input id="seats" type="number" placeholder="Seats" name="route[seats]" value="{{ route.seats }}"/>
                             <p class="error-msg">{% if errors.seats is defined %}{{ errors.seats|join(', ') }}{% endif %}</p>
                         </div>
 

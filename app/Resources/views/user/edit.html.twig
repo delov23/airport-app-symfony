@@ -13,10 +13,14 @@
                         </a>
                     </div>
                     <div class="form-content">
+                        <div class="label-group">
+                            <label for="title">Title</label>
+                            <label style="flex: 2.3" for="fullName">Full Name</label>
+                        </div>
                         <div class="form-group-2">
-                            <input class="small" type="text" placeholder="Title" name="user[title]"
+                            <input id="title" class="small" type="text" placeholder="Title" name="user[title]"
                                    value="{{ user.title }}"/>
-                            <input class="large" type="text" placeholder="Name" name="user[fullName]"
+                            <input id="fullName" class="large" type="text" placeholder="Name" name="user[fullName]"
                                    value="{{ user.fullName }}"/>
                         </div>
                         <p class="error-msg">{% if errors.title is defined %}{{ errors.title|join('. ') }}{% endif %}</p>

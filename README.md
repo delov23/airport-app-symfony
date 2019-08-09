@@ -23,22 +23,25 @@
 3. Flight 
 - C ✅, R ✅, U ✅, D ✅
 - View Departures/Arrivals ✅
-4. Favourite flight (Many to many User-Flight)
+4. Favourite flight (Many to many User-Flight) ✅
 5. Reset Password - Table Authentication:
 - Long id (Authentication string), expiry date and user_id (string id put as query)
 
 ## Finalisation of the project
 - Password Change
 - Favorite Flight ✅
-- Add labels on forms
+- Add labels on forms ✅
+- Check if one of the airports is PLV
+- Make the fields full names -> PLV to Plovdiv Airport
 - Verify that an entity exists
 - Verify that seatsTaken <= seatsAll ✅
-- Constraints!!!
+- UN-star at profile ✅
+- Constraints!!! - Custom messages
 - Final checks - be aware of dates, constraints and security
 - Improve code quality
 - If time, improve form rendering (a lot repeating)
-- Split logic into an Admin Controller
 - ?USER_EMPLOYEE
 - TEST THE SITE WITH: Unauthenticated people, USER_ROLE people and USER_ADMIN
 - Functions out of the controllers
+- Split logic into an Admin Controller
 - Select menus -> selected attr
