@@ -15,21 +15,28 @@
 - Landing - ✅
 - Base - ✅
 1. User 
-- Register ✅, Login ✅, Profile ✅, Edit
+- Register ✅, Login ✅, Profile ✅, Edit ✅
 - (Extra) Reset Password via Email
 2. Route 
-- C ✅, R ✅, U 
+- C ✅, R ✅, U ✅ 
 - View All ✅
-- Delete -> make inactive
 3. Flight 
-- C ✅, R ✅, U
+- C ✅, R ✅, U ✅, D ✅
 - View Departures/Arrivals ✅
-- Search for flight and make a reservation 
-- Delete -> make completed
-4. Reservation 
-- Book, Preview 
-- Get Ticket At Email
+4. Favourite flight (Many to many User-Flight)
+5. Reset Password - Table Authentication:
+- Long id (Authentication string), expiry date and user_id (string id put as query)
 
-## Things to check out
-- Security:
-https://symfony.com/doc/3.4/security/voters.html
+## Finalisation of the project
+- Password Change
+- Favorite Flight
+- Add labels on forms
+- Verify that an entity exists
+- Verify that seatsTaken <= seatsAll
+- Constraints!!!
+- Final checks - be aware of dates, constraints and security
+- Improve code quality
+- If time, improve form rendering (a lot repeating)
+- Split logic into an Admin Controller
+- ?USER_EMPLOYEE
+- TEST THE SITE WITH: Unauthenticated people, USER_ROLE people and USER_ADMIN
