@@ -81,9 +81,21 @@ class User implements UserInterface, Serializable
      */
     private $roles;
 
+    /**
+     * @var Flight[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Flight", inversedBy="users")
+     * @ORM\JoinTable(name="users_flights",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="flight_id", referencedColumnName="id")})
+     */
+    private $flights;
+
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->flights = new ArrayCollection();
     }
 
     /**
@@ -291,7 +303,8 @@ class User implements UserInterface, Serializable
             $this->title,
             $this->fullName,
             $this->roles,
-            $this->imageName
+            $this->imageName,
+            $this->flights
         ]);
     }
 
@@ -305,7 +318,31 @@ class User implements UserInterface, Serializable
             $this->fullName,
             $this->roles,
             $this->imageName,
+            $this->flights
             ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Flight[]|ArrayCollection
+     */
+    public function getFlights()
+    {
+        return $this->flights;
+    }
+
+    /**
+     * @param Flight[]|ArrayCollection $flights
+     * @return User
+     */
+    public function setFlights($flights): User
+    {
+        $this->flights = $flights;
+        return $this;
+    }
+
+    public function addFlight(Flight $flight)
+    {
+        $this->flights[] = $flight;
     }
 }
 

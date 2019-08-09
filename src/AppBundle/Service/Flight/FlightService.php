@@ -64,9 +64,13 @@ class FlightService extends AbstractService implements FlightServiceInterface
         $this->em->flush();
     }
 
-    public function edit(Flight $flight): void
+    public function edit(Flight $flight): bool
     {
+        if (!$flight || $flight->getSeatsTaken() > $flight->getRoute()->getSeats()) {
+            return false;
+        }
         $this->em->merge($flight);
         $this->em->flush();
+        return true;
     }
 }

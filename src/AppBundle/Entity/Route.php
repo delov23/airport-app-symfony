@@ -14,7 +14,7 @@ use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RouteRepository")
  * @Vich\Uploadable()
  */
-class Route
+class Route implements \Serializable
 {
     /**
      * @var string
@@ -262,6 +262,47 @@ class Route
     {
         $this->image = $image;
         return $this;
+    }
+
+    /**
+     * String representation of object
+     * @link https://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->toAirport,
+            $this->fromAirport,
+            $this->flightNumber,
+            $this->seats,
+            $this->duration,
+            $this->company,
+            $this->imageName
+        ]);
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->toAirport,
+            $this->fromAirport,
+            $this->flightNumber,
+            $this->seats,
+            $this->duration,
+            $this->company,
+            $this->imageName
+            ) = unserialize($serialized);
     }
 }
 

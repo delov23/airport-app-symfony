@@ -15,7 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class FlightDetailsType extends AbstractType
 {
@@ -65,7 +67,11 @@ class FlightDetailsType extends AbstractType
                     new NotBlank(),
                 ]
             ])
-            ->add('gate', TextType::class, [])
+            ->add('gate', TextType::class, [
+                'constraints' => [
+                    new NotBlank()
+                ]
+            ])
             ->add('bagsCheckIn', DateTimeType::class, [
                 'invalid_message' => 'Not a valid date.',
                 'html5' => true,

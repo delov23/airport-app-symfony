@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -94,9 +95,17 @@ class Flight
      */
     private $progress;
 
+    /**
+     * @var ArrayCollection|User[]
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="flights")
+     */
+    private $users;
+
 
     public function __construct()
     {
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -316,7 +325,7 @@ class Flight
     /**
      * @return Progress
      */
-    public function getProgress(): Progress
+    public function getProgress(): ?Progress
     {
         return $this->progress;
     }
@@ -328,6 +337,24 @@ class Flight
     public function setProgress(?Progress $progress): Flight
     {
         $this->progress = $progress;
+        return $this;
+    }
+
+    /**
+     * @return User[]|ArrayCollection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param User[]|ArrayCollection $users
+     * @return Flight
+     */
+    public function setUsers($users): self
+    {
+        $this->users = $users;
         return $this;
     }
 }

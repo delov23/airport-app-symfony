@@ -4,6 +4,7 @@
 namespace AppBundle\Service\User;
 
 
+use AppBundle\Entity\Flight;
 use AppBundle\Entity\User;
 use AppBundle\Repository\UserRepository;
 use AppBundle\Service\AbstractService;
@@ -59,5 +60,15 @@ class UserService extends AbstractService implements UserServiceInterface
     {
         $this->em->merge($user);
         $this->em->flush();
+    }
+
+    public function toggleFlight(User $user, Flight $flight): void
+    {
+        if (!$user->getFlights()->contains($flight)) {
+            $user->addFlight($flight);
+        } else {
+            $user->getFlights()->removeElement($flight);
+        }
+        $this->edit($user);
     }
 }

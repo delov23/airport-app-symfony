@@ -24,5 +24,5 @@ interface FlightServiceInterface
 
     public function remove(Flight $flight): void;
 
-    public function edit(Flight $flight): void;
+    public function edit(Flight $flight): bool;
 }

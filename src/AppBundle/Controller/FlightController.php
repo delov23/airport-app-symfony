@@ -3,11 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Flight;
+use AppBundle\Entity\User;
 use AppBundle\Form\FlightDetailsType;
 use AppBundle\Form\FlightType;
 use AppBundle\Service\Flight\FlightServiceInterface;
 use AppBundle\Service\Progress\ProgressServiceInterface;
 use AppBundle\Service\Route\RouteServiceInterface;
+use AppBundle\Service\User\UserServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,12 +35,18 @@ class FlightController extends BaseController
      */
     private $progressService;
 
+    /**
+     * @var UserServiceInterface
+     */
+    private $userService;
 
-    public function __construct(RouteServiceInterface $routeService, FlightServiceInterface $flightService, ProgressServiceInterface $progressService)
+
+    public function __construct(RouteServiceInterface $routeService, FlightServiceInterface $flightService, ProgressServiceInterface $progressService, UserServiceInterface $userService)
     {
         $this->routeService = $routeService;
         $this->flightService = $flightService;
         $this->progressService = $progressService;
+        $this->userService = $userService;
     }
 
     /**
@@ -48,9 +56,11 @@ class FlightController extends BaseController
      */
     public function scheduleView()
     {
+        $userFlights = $this->userService->getById($this->getUser()->getId())->getFlights()->toArray();
         return $this->render('flight/schedule.html.twig', [
             'departures' => $this->flightService->getByType('departures'),
-            'arrivals' => $this->flightService->getByType('arrivals')
+            'arrivals' => $this->flightService->getByType('arrivals'),
+            'flightIds' => array_map(function (Flight $flight) { return $flight->getId(); }, $userFlights),
         ]);
     }
 
@@ -112,7 +122,12 @@ class FlightController extends BaseController
         $flight = $this->flightService->getById($id);
         return $this->verifyEntity(FlightDetailsType::class, 'flight', $flight, $request, 'flight/edit.html.twig',
             function (Flight $flight) {
-                $this->flightService->edit($flight);
+                $success = $this->flightService->edit($flight);
+                if (!$success) {
+                    $finalArray = array_merge($this->getFormArray(FlightDetailsType::class, $flight, 'flight'), ['errors' => ['seatsTaken' => 'The taken seats cannot be more than the seats on the flight.'], 'progressTypes' => $this->progressService->getAll()]);
+                    return $this->render('flight/edit.html.twig', $finalArray);
+                }
+                return null;
             }, 'index', ['progressTypes' => $this->progressService->getAll()]);
     }
 
@@ -158,5 +173,20 @@ class FlightController extends BaseController
         $flight = $this->flightService->getById($id);
         $this->flightService->remove($flight);
         return $this->redirectToRoute('search_flight', ['flight' => $flight->getRoute()->getFlightNumber()]);
+    }
+
+    /**
+     * @Route("/star/{id}", name="flight_star", methods={"GET"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     *
+     * @param $id
+     * @return Response
+     */
+    public function star($id)
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $this->userService->toggleFlight($user, $this->flightService->getById($id));
+        return $this->redirectToRoute('flight_schedule');
     }
 }

@@ -29,10 +29,10 @@
 
 ## Finalisation of the project
 - Password Change
-- Favorite Flight
+- Favorite Flight ✅
 - Add labels on forms
 - Verify that an entity exists
-- Verify that seatsTaken <= seatsAll
+- Verify that seatsTaken <= seatsAll ✅
 - Constraints!!!
 - Final checks - be aware of dates, constraints and security
 - Improve code quality
@@ -40,3 +40,5 @@
 - Split logic into an Admin Controller
 - ?USER_EMPLOYEE
 - TEST THE SITE WITH: Unauthenticated people, USER_ROLE people and USER_ADMIN
+- Functions out of the controllers
+- Select menus -> selected attr

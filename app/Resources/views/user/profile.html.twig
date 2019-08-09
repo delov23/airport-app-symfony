@@ -4,12 +4,55 @@
     {{ user.fullName }}'s Profile
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/flights.css') }}">
+{% endblock %}
+
 {% block main %}
     <main class="main-section">
         <h1 class="text-center fancy-text">
             Welcome, {{ user.title }} {{ user.fullName }}
         </h1>
         <h2 class="text-center fancy-text-small margin-top">Email: {{ user.email }}</h2>
+        <hr/>
+        <div class="column text-center margin-top">
+            {% if user.flights|length %}
+                <h2>Your saved flights</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Flight No.</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Check-in</th>
+                            <th>Bags check-in</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="arrivals-data">
+                        {% for flight in user.flights %}
+                            <tr>
+                                <td>{{ flight.route.flightNumber }}</td>
+                                <td>{{ flight.route.fromAirport }}</td>
+                                <td>{{ flight.route.toAirport }}</td>
+                                <td>{{ flight.date|date }}</td>
+                                <td>{{ flight.progress.event }} {{ flight.progressTime|date('H:i') }}</td>
+                                <td>{{ flight.checkIn|date('d.M - H:i') }}</td>
+                                <td>{{ flight.bagsCheckIn|date('d.M - H:i') }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <h2>Your starred flights will appear here.</h2>
+            {% endif %}
+        </div>
+        <hr/>
         <div class="column text-center margin-top">
             <h2>Your account</h2>
             <a href="{{ path('user_profile') }}">

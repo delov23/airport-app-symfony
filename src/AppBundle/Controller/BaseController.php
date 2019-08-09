@@ -28,7 +28,7 @@ abstract class BaseController extends Controller
      * @param callable $logic The call of the service to manage the entity. ($e) -> $this->service->save($e);
      * @param string $routeOnSuccess Optional. Where to redirect after success (default: 'index')
      * @param array $templateOnFailProps Optional. Any other props for the template in the Get Method.
-     * @param array $entitiesToRemoveFromForm
+     * @param array $entitiesToRemoveFromForm Optional. If the form needs some values out, you can pass them.
      * @return Response
      * @author Dimitar Delov
      */
@@ -41,8 +41,8 @@ abstract class BaseController extends Controller
         }
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $logic($entity);
-            return $this->redirectToRoute($routeOnSuccess);
+            $newReturn = $logic($entity);
+            return $newReturn ? $newReturn : $this->redirectToRoute($routeOnSuccess);
         } else {
             $finalArray = array_merge($this->getFormArray($type, $entity, $entityName), ['errors' => $this->mapErrors($form->getErrors(true))], $templateOnFailProps);
             return $this->render($templateOnFail, $finalArray);
