@@ -52,4 +52,10 @@ class RouteService extends AbstractService implements RouteServiceInterface
     {
         return $this->routeRepository->findBy(['toAirport' => self::PLOVDIV_AIRPORT]);
     }
+
+    public function edit(Route $route): void
+    {
+        $this->em->persist($route);
+        $this->em->flush();
+    }
 }

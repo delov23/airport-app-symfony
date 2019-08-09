@@ -12,7 +12,7 @@
 {% block main %}
     <main class="main-section">
         <div class="flights-header">
-            <h1>Flight {{ flights[0].route.flightNumber }} from {{ flights[0].route.fromAirport }} to {{ flights[0].route.toAirport }}</h1>
+            <h1>Route {{ flights[0].route.flightNumber }} from {{ flights[0].route.fromAirport }} to {{ flights[0].route.toAirport }}</h1>
         </div>
         <div class="table-wrapper">
             <table>
@@ -24,7 +24,7 @@
                     <th>Info - terminal/gate</th>
                     <th>Check-in - person/luggage</th>
                     <th>Add details</th>
-                    <th>Complete</th>
+                    <th>Remove</th>
                 </tr>
                 </thead>
 
@@ -33,18 +33,18 @@
                     <tr>
                         <td>{{ flight.date|date }}</td>
                         <td>{{ flight.route.seats }}/{{ flight.seatsTaken }}</td>
-                        <td>{{ flight.progress.event }} {{ flight.progressTime }}</td>
+                        <td>{{ flight.progress.event }} {{ flight.progressTime|date('H:i') }}</td>
                         <td>{{ flight.terminal }}/{% if flight.gate %}{{ flight.gate }}{% else %}No info{% endif %}</td>
-                        <td>{% if flight.checkIn %}{{ flight.checkIn|date }}{% else %}No info{% endif %}/{% if flight.bagsCheckIn %}{{ flight.bagsCheckIn|date }}{% else %}No info{% endif %}</td>
+                        <td>{% if flight.checkIn %}{{ flight.checkIn|date('d.M \\- H:i') }}{% else %}No info{% endif %}/{% if flight.bagsCheckIn %}{{ flight.bagsCheckIn|date('d.M \\- H:i') }}{% else %}No info{% endif %}</td>
                         <td>
-                            <a href="">
+                            <a href="{{ path('flight_edit', {id: flight.id}) }}">
                                 <button class="btn-fill-warning">&raquo;</button>
                             </a>
                         </td>
                         <td>
-                            <a href="">
-                                <button class="btn-fill-danger">&raquo;</button>
-                            </a>
+                            <form method="post" action="{{ path('flight_remove', {id: flight.id }) }}">
+                                <button class="btn-fill-danger">&cross;</button>
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}

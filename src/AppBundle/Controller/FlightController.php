@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Flight;
+use AppBundle\Form\FlightDetailsType;
 use AppBundle\Form\FlightType;
 use AppBundle\Service\Flight\FlightServiceInterface;
 use AppBundle\Service\Progress\ProgressServiceInterface;
@@ -82,18 +83,52 @@ class FlightController extends BaseController
     }
 
     /**
+     * @Route("/edit/{id}", name="flight_edit", methods={"GET"})
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param $id
+     * @return Response
+     */
+    public function editView($id)
+    {
+        $flight = $this->flightService->getById($id);
+        return $this->render('flight/edit.html.twig', [
+            'form' => $this->createForm(FlightDetailsType::class, $flight)->createView(),
+            'flight' => $flight,
+            'progressTypes' => $this->progressService->getAll()
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", methods={"POST"})
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param Request $request
+     * @param $id
+     * @return Response
+     */
+    public function editProcess(Request $request, $id)
+    {
+        $flight = $this->flightService->getById($id);
+        return $this->verifyEntity(FlightDetailsType::class, 'flight', $flight, $request, 'flight/edit.html.twig',
+            function (Flight $flight) {
+                $this->flightService->edit($flight);
+            }, 'index', ['progressTypes' => $this->progressService->getAll()]);
+    }
+
+    /**
      * @Route("/route", name="search_flight", methods={"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *
      * @param Request $request
      * @return Response
      */
-    public function findOneRedirect(Request $request)
+    public function findFlights(Request $request)
     {
         $flightNumber = $request->get('flight');
         $flights = $this->flightService->getByFlightNumber($flightNumber);
         if (!$flights || count($flights) === 0) {
-            $this->addFlash('warning', 'No route with the flight number "' . $flightNumber . '"');
+            $this->addFlash('warning', 'No flights with the flight number "' . $flightNumber . '"');
             return $this->redirectToRoute('admin_panel');
         }
         return $this->render('flight/admin.html.twig', ['flights' => $flights]);
@@ -109,5 +144,19 @@ class FlightController extends BaseController
     public function detailsView(int $id)
     {
         return $this->render('flight/details.html.twig', ['flight' => $this->flightService->getById($id)]);
+    }
+
+    /**
+     * @Route("/remove/{id}", name="flight_remove", methods={"POST"})
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param $id
+     * @return Response
+     */
+    public function remove($id)
+    {
+        $flight = $this->flightService->getById($id);
+        $this->flightService->remove($flight);
+        return $this->redirectToRoute('search_flight', ['flight' => $flight->getRoute()->getFlightNumber()]);
     }
 }

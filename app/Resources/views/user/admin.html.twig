@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    ADMIN PANEL
+    Admin Panel
 {% endblock %}
 
 {% block stylesheets %}
@@ -17,6 +17,11 @@
                 <div class="columns">
                     <div class="column text-center">
                         <h2>Routes Management</h2>
+                        <hr />
+                        <a href="{{ path('route_create') }}">
+                            <button class="btn-fill-success" style="width: 50%">Create route</button>
+                        </a>
+                        <hr />
                         <div class="table-wrapper">
                             <table>
                                 <thead>
@@ -47,6 +52,11 @@
                     </div>
                     <div class="column text-center">
                         <h2>Flights Management</h2>
+                        <hr />
+                        <a href="{{ path('flight_create') }}">
+                            <button class="btn-fill-success" style="width: 50%">Create flight</button>
+                        </a>
+                        <hr />
                         {% for message in app.session.flashbag.get('warning') %}
                             <p class="error-msg">{{ message }}</p>
                         {% endfor %}
@@ -60,18 +70,24 @@
                     </div>
                     <div class="column text-center">
                         <h2>Users Management</h2>
+                        <hr />
+                        <a href="{{ path('security_logout') }}">
+                            <button class="btn-fill-success" style="width: 50%">Log out</button>
+                        </a>
+                        <hr />
                         <div class="table-wrapper">
                             <table>
                                 <thead>
                                 <tr>
                                     <th>Image</th>
                                     <th>Email</th>
-                                    <th>Manage</th>
+                                    <th>Admin</th>
                                 </tr>
                                 </thead>
 
                                 <tbody id="departures-data">
                                 {% for user in users %}
+                                    {% if not user.hasRole('ROLE_ADMIN') %}
                                     <tr>
                                         <td class="text-center">
                                             <img class="shadow-img" style="width: 45%"
@@ -79,11 +95,12 @@
                                         </td>
                                         <td>{{ user.email }}</td>
                                         <td class="text-center">
-                                            <a href="{{ path('user_profile', {id: user.id}) }}">
-                                                <button class="more-info">&raquo;</button>
-                                            </a>
+                                            <form method="post" action="{{ path('make_admin', {id: user.id }) }}">
+                                                <button class="btn-fill-success">&uparrow;</button>
+                                            </form>
                                         </td>
                                     </tr>
+                                    {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>

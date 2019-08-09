@@ -28,12 +28,17 @@ abstract class BaseController extends Controller
      * @param callable $logic The call of the service to manage the entity. ($e) -> $this->service->save($e);
      * @param string $routeOnSuccess Optional. Where to redirect after success (default: 'index')
      * @param array $templateOnFailProps Optional. Any other props for the template in the Get Method.
+     * @param array $entitiesToRemoveFromForm
      * @return Response
+     * @author Dimitar Delov
      */
-    protected function verifyEntity(string $type, string $entityName, object $startEntity, Request $request, string $templateOnFail, callable $logic, string $routeOnSuccess = 'index', array $templateOnFailProps = [])
+    protected function verifyEntity(string $type, string $entityName, object $startEntity, Request $request, string $templateOnFail, callable $logic, string $routeOnSuccess = 'index', array $templateOnFailProps = [], array $entitiesToRemoveFromForm = [])
     {
         $entity = $startEntity;
         $form = $this->createForm($type, $entity);
+        foreach ($entitiesToRemoveFromForm as $entityToRemove) {
+            $form->remove($entityToRemove);
+        }
         $form->handleRequest($request);
         if ($form->isValid()) {
             $logic($entity);

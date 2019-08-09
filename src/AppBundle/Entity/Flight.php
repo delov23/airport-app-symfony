@@ -325,7 +325,7 @@ class Flight
      * @param Progress $progress
      * @return Flight
      */
-    public function setProgress(Progress $progress): Flight
+    public function setProgress(?Progress $progress): Flight
     {
         $this->progress = $progress;
         return $this;

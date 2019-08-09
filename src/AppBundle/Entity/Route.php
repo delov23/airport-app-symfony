@@ -258,7 +258,7 @@ class Route
      * @param File $image
      * @return Route
      */
-    public function setImage(File $image): Route
+    public function setImage(File $image = null): Route
     {
         $this->image = $image;
         return $this;

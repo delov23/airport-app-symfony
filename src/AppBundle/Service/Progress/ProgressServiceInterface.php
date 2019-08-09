@@ -9,4 +9,6 @@ use AppBundle\Entity\Progress;
 interface ProgressServiceInterface
 {
     public function getById($id): Progress;
+
+    public function getAll(): array;
 }

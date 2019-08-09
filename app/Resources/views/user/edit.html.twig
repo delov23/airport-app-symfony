@@ -28,7 +28,7 @@
                             </a>
                         </div>
 
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('editUser') }}" />
+                        {{ form_row(form._token) }}
 
                         <div class="form-group text-center">
                             <button id="test-btn" type="submit" class="btn-fill">Ready</button>

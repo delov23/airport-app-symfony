@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use AppBundle\Service\Role\RoleServiceInterface;
 use AppBundle\Service\Route\RouteServiceInterface;
 use AppBundle\Service\User\UserServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -23,11 +24,14 @@ class UserController extends BaseController
 
     private $routeService;
 
+    private $roleService;
 
-    public function __construct(UserServiceInterface $userService, RouteServiceInterface $routeService)
+
+    public function __construct(UserServiceInterface $userService, RouteServiceInterface $routeService, RoleServiceInterface $roleService)
     {
         $this->userService = $userService;
         $this->routeService = $routeService;
+        $this->roleService = $roleService;
     }
 
     /**
@@ -103,6 +107,8 @@ class UserController extends BaseController
 
     /**
      * @Route("/edit", methods={"POST"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     *
      *
      * @param Request $request
      * @return Response
@@ -117,7 +123,25 @@ class UserController extends BaseController
             $this->userService->edit($user);
             return $this->redirectToRoute('user_profile');
         } else {
-            return $this->render('user/edit.html.twig', ['errors' => $this->mapErrors($form->getErrors(true)), 'form' => $form, 'user' => $user]);
+            return $this->render('user/edit.html.twig', ['errors' => $this->mapErrors($form->getErrors(true)), 'form' => $form->createView(), 'user' => $user]);
         }
     }
+
+    /**
+     * @Route("/admin/make/{id}", methods={"POST"}, name="make_admin")
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function makeAdminProcess(Request $request, $id)
+    {
+        $user = $this->userService->getById($id);
+        $user->addRole($this->roleService->findByName('ROLE_ADMIN'));
+        $this->userService->edit($user);
+        return $this->redirectToRoute('admin_panel');
+    }
+
+
 }

@@ -66,10 +66,49 @@ class RouteController extends BaseController
     /**
      * @Route("/{id}", name="route_details", methods={"GET"})
      *
+     * @param $id
      * @return Response
      */
     public function detailsView($id)
     {
         return $this->render('route/details.html.twig', ['route' => $this->routeService->getById($id)]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="route_edit", methods={"GET"})
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param $id
+     * @return Response
+     */
+    public function editView($id)
+    {
+        $route = $this->routeService->getById($id);
+        return $this->render('route/edit.html.twig', [
+            'form' => $this->createForm(RouteType::class, $route)->remove('image')->remove('fromAirport')->remove('toAirport')->remove('flightNumber')->createView(),
+            'route' => $route
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", methods={"POST"})
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param Request $request
+     * @param string $id
+     * @return Response
+     */
+    public function editProcess(Request $request, string $id)
+    {
+        $route = $this->routeService->getById($id);
+        $form = $this->createForm(RouteType::class, $route);
+        $form->remove('fromAirport')->remove('toAirport')->remove('image')->remove('flightNumber');
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $this->routeService->edit($route);
+            return $this->redirectToRoute('route_details', ['id' => $id]);
+        } else {
+            return $this->render('route/edit.html.twig', ['errors' => $this->mapErrors($form->getErrors(true)), 'form' => $form->createView(), 'route' => $route]);
+        }
     }
 }

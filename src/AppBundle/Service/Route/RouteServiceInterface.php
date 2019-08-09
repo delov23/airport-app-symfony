@@ -27,4 +27,6 @@ interface RouteServiceInterface
      */
     public function getAllArrivals(): array;
 
+    public function edit(Route $route): void;
+
 }

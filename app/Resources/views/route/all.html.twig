@@ -18,7 +18,7 @@
                 <img src="{{ vich_uploader_asset(route, 'image') }}" alt="">
                 <div class="route-info">
                     <h2>Travel to <span class="toAirport">{{ route.toAirport }}</span></h2>
-                    <a href="">
+                    <a href="{{ path('route_details', {id: route.flightNumber}) }}">
                         <button class="btn-fill">Learn more ❯❯</button>
                     </a>
                 </div>

@@ -30,4 +30,9 @@ class ProgressService extends AbstractService implements ProgressServiceInterfac
         $progress = $this->progressRepository->find($id);
         return $progress;
     }
+
+    public function getAll(): array
+    {
+        return $this->progressRepository->findAll();
+    }
 }

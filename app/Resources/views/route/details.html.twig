@@ -29,11 +29,8 @@
         {% if is_granted('ROLE_ADMIN') %}
             <div class="columns">
                 <div class="column text-center">
-                    <a href="">
-                        <button class="btn-fill-warning">Edit route</button>
-                    </a>
-                    <a href="">
-                        <button class="btn-fill-danger">Make inactive</button>
+                    <a href="{{ path('route_edit', {id: route.flightNumber}) }}">
+                        <button class="btn-fill-warning btn-wide">Edit route</button>
                     </a>
                 </div>
             </div>

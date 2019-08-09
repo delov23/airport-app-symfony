@@ -24,7 +24,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="datetime-local" placeholder="Date" name="flight[date]" value="{{ flight.date }}"/>
+                            <input type="datetime-local" placeholder="Date" name="flight[date]" value="{{ flight.date|date('Y-m-d\\TH:i') }}"/>
                             <p class="error-msg">{% if errors.date is defined %}{{ errors.date|join(' ') }}{% endif %}</p>
                         </div>
 

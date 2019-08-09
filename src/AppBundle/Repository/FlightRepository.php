@@ -70,25 +70,4 @@ class FlightRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    /**
-     * @param Search $search
-     * @return Flight|null
-     */
-    public function search(Search $search)
-    {
-        try {
-            return $this->createQueryBuilder('f')
-                ->select('f')
-                ->addSelect('r')
-                ->join('f.route', 'r')
-                ->andWhere('r.fromAirport = :fromAirport')
-                ->andWhere('r.toAirport = :toAirport')
-                ->setParameters(['fromAirport' => $search->getFromAirport(), 'toAirport' => $search->getToAirport()])
-                ->getQuery()
-                ->getSingleResult();
-        } catch (Exception $e) {
-            return null;
-        }
-    }
 }

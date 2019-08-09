@@ -58,8 +58,15 @@ class FlightService extends AbstractService implements FlightServiceInterface
         return $flight;
     }
 
-    public function search(Search $search): ?Flight
+    public function remove(Flight $flight): void
     {
-        return $this->flightRepository->search($search);
+        $this->em->remove($flight);
+        $this->em->flush();
+    }
+
+    public function edit(Flight $flight): void
+    {
+        $this->em->merge($flight);
+        $this->em->flush();
     }
 }

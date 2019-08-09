@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Route{% endblock %}
+
+{% block main %}
+    <main>
+        <section class="form-wrapper" data-aos="fade-down">
+            <form id="form" name="editRoute" action="{{ path('route_edit', {id: route.flightNumber}) }}" method="post" enctype="multipart/form-data">
+                <div class="form" id="animate">
+                    <div class="form-header">
+                        <div class="a-form-section">
+                            <h3 class="text-center">EDIT ROUTE {{ route.flightNumber }}</h3>
+                            <h3 class="text-center">from {{ route.fromAirport }} to {{ route.toAirport }}</h3>
+                        </div>
+                    </div>
+                    <div class="form-content">
+                        <div class="label-group">
+                            <label for="company" class="text-white">Company</label>
+                            <label for="duration" class="text-white">Duration</label>
+                        </div>
+                        <div class="form-group-2">
+                            <input id="company" type="text" placeholder="Company" name="route[company]" value="{{ route.company }}"/>
+                            <input id="duration" type="text" placeholder="Duration (H:m)" name="route[duration]"
+                                   value="{{ route.duration }}"/>
+                        </div>
+                        <p class="error-msg">{% if errors.duration is defined %}{{ errors.duration|join(', ') }}{% endif %}</p>
+                        <p class="error-msg">{% if errors.company is defined %}{{ errors.company|join(', ') }}{% endif %}</p>
+
+                        <div class="label-group">
+                            <label for="seats" class="text-white">Seats</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="seats" type="number" placeholder="Seats" name="route[seats]" value="{{ route.seats }}"/>
+                            <p class="error-msg">{% if errors.seats is defined %}{{ errors.seats|join(', ') }}{% endif %}</p>
+                        </div>
+
+{#                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('editRoute') }}" />#}
+                        {{ form_row(form._token) }}
+
+                        <div class="form-group text-center">
+                            <button id="test-btn" type="submit" class="btn-fill">Update Route</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+{% endblock %}

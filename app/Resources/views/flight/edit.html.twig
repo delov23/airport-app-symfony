@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Flight{% endblock %}
+
+{% block main %}
+    <main>
+        <section class="form-wrapper" data-aos="fade-down">
+            <form id="form" action="{{ path('flight_edit', {id: flight.id}) }}" method="post" enctype="multipart/form-data">
+                <div class="form" id="animate">
+                    <div class="form-header">
+                        <div class="a-form-section">
+                            <h3 class="text-center">UPDATE FLIGHT DATA</h3>
+                        </div>
+                    </div>
+                    <div class="form-content">
+                        <div class="label-group"><label for="date">Flight Date</label></div>
+                        <div class="form-group">
+                            <input id="date" type="datetime-local" placeholder="Date" name="flight_details[date]" value="{{ flight.date|date('Y-m-d\\TH:i') }}"/>
+                            <p class="error-msg">{% if errors.date is defined %}{{ errors.date|join(' ') }}{% endif %}</p>
+                        </div>
+
+                        <div class="label-group"><label for="price">Price per seat</label></div>
+                        <div class="form-group">
+                            <input id="price" type="number" step="2" placeholder="Price per normal seat" name="flight_details[price]" value="{{ flight.price }}"/>
+                            <p class="error-msg">{% if errors.price is defined %}{{ errors.price|join(' ') }}{% endif %}</p>
+                        </div>
+
+                        <div class="label-group"><label for="terminal">Terminal</label></div>
+                        <div class="form-group">
+                            <input id="terminal" type="text" placeholder="Terminal of departure" name="flight_details[terminal]" value="{{ flight.terminal }}"/>
+                            <p class="error-msg">{% if errors.terminal is defined %}{{ errors.terminal|join(' ') }}{% endif %}</p>
+                        </div>
+
+                        <div class="label-group"><label for="gate">Gate</label></div>
+                        <div class="form-group">
+                            <input id="gate" type="text" placeholder="Gate of departure" name="flight_details[gate]" value="{{ flight.gate }}"/>
+                            <p class="error-msg">{% if errors.gate is defined %}{{ errors.gate|join(' ') }}{% endif %}</p>
+                        </div>
+
+                        <div class="label-group"><label for="checkIn">Passengers check-in</label></div>
+                        <div class="form-group">
+                            <input id="checkIn" type="datetime-local" name="flight_details[checkIn]" value="{{ flight.checkIn|date('Y-m-d\\TH:i') }}"/>
+                            <p class="error-msg">{% if errors.checkIn is defined %}{{ errors.checkIn|join(' ') }}{% endif %}</p>
+                        </div>
+
+                        <div class="label-group"><label for="bagsCheckIn">Luggage check-in</label></div>
+                        <div class="form-group">
+                            <input id="bagsCheckIn" type="datetime-local" name="flight_details[bagsCheckIn]" value="{{ flight.bagsCheckIn|date('Y-m-d\\TH:i') }}"/>
+                            <p class="error-msg">{% if errors.bagsCheckIn is defined %}{{ errors.bagsCheckIn|join(' ') }}{% endif %}</p>
+                        </div>
+
+                        <div class="form-group">
+                            <select name="flight_details[progress]">
+                                <option value="" selected disabled>Update progress</option>
+                                {% for progress in progressTypes %}
+                                    <option value="{{ loop.index - 1 }}">{{ progress.event }}</option>
+                                {% endfor %}
+                            </select>
+                            <p class="error-msg">{% if errors.progress is defined %}{{ errors.progress|join(' ') }}{% endif %}</p>
+                        </div>
+
+                        <div class="label-group"><label for="progressTime">Progress Time of event</label></div>
+                        <div class="form-group">
+                            <input id="progressTime" type="time" name="flight_details[progressTime]" value="{{ flight.progressTime|date('H:i') }}"/>
+                            <p class="error-msg">{% if errors.progressTime is defined %}{{ errors.progressTime|join(' ') }}{% endif %}</p>
+                        </div>
+
+                        <div class="label-group"><label for="seatsTaken">Seats Taken</label></div>
+                        <div class="form-group">
+                            <input id="seatsTaken" type="number" placeholder="Seats taken" name="flight_details[seatsTaken]" value="{{ flight.seatsTaken }}"/>
+                            <p class="error-msg">{% if errors.seatsTaken is defined %}{{ errors.seatsTaken|join(' ') }}{% endif %}</p>
+                        </div>
+
+                        {{ form_row(form._token) }}
+
+                        <div class="form-group text-center">
+                            <button id="test-btn" type="submit" class="btn-fill">Edit Flight</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+{% endblock %}
