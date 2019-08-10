@@ -32,7 +32,7 @@
 - Favorite Flight ✅
 - Add labels on forms ✅
 - Check if one of the airports is PLV ✅
-- Make the fields full names -> PLV to Plovdiv Airport
+- Make the fields full names -> PLV to Plovdiv Airport ✅
 - UN-star at profile ✅
 - Select menus -> selected attr ✅
 
@@ -40,9 +40,10 @@
 - Password Change ✅
 
 3. Assertion
-- Verify that an entity exists
+- Verify that an entity exists ✅
+- HTML5 Validator 
 - Verify that seatsTaken <= seatsAll ✅
-- Constraints!!! - Custom messages
+- Constraints!!! - Custom messages ✅
 
 4. Checks
 - Final checks - be aware of dates, constraints and security
@@ -53,3 +54,8 @@
 - If time, improve form rendering (a lot repeating)
 - Functions out of the controller closures <-> callbacks
 - Split logic into an Admin Controller ✅
+
+6. Non-code related TODO's:
+- Check MIC
+- Check Skype
+- Add documentation

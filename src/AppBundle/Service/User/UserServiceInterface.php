@@ -5,6 +5,7 @@ namespace AppBundle\Service\User;
 
 
 use AppBundle\Entity\Flight;
+use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 
 interface UserServiceInterface
@@ -20,4 +21,6 @@ interface UserServiceInterface
     public function toggleFlight(User $user, Flight $flight): void;
 
     public function resetPassword(User $user, string $newPassword);
+
+    public function addRoleAndSave(User $user, Role $role);
 }

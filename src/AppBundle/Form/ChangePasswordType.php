@@ -19,7 +19,7 @@ class ChangePasswordType extends AbstractType
             'type' => PasswordType::class,
             'constraints' => [
                 new Length(['min' => 5, 'max' => 80]),
-                new NotBlank()
+                new NotBlank(['message' => 'The field "Password" is required.'])
             ]
         ]);
     }

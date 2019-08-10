@@ -95,7 +95,7 @@ class AuthenticationController extends BaseController
             return $this->render('auth/reset-password-form.html.twig', [
                 'errors' => $this->mapErrors($form->getErrors(true)),
                 'form' => $form->createView(),
-                'stringError' => $valid ? null : 'Your auth string is not valid anymore. Request new password change.']
+                'stringError' => $valid ? null : 'Your auth string is not valid anymore. Request a new password change.']
             );
         }
     }

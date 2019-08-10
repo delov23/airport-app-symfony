@@ -53,8 +53,8 @@ class RouteController extends BaseController
                     $alert = 'One of the airports has to be Plovdiv Airport.';
                     return $this->render('route/create.html.twig', array_merge(
                         $this->getFormArray(RouteType::class, $route, 'route'),
-                        ['errors' => ['fromAirport' => $alert, 'toAirport' => $alert]]
-                    ));
+                        ['errors' => ['fromAirport' => $alert, 'toAirport' => $alert]])
+                    );
                 }
                 return null;
             }
@@ -79,7 +79,9 @@ class RouteController extends BaseController
      */
     public function detailsView($id)
     {
-        return $this->render('route/details.html.twig', ['route' => $this->routeService->getById($id)]);
+        $route = $this->routeService->getById($id);
+        if (!$route) return $this->handleNullEntity('route', 'all_routes');
+        return $this->render('route/details.html.twig', ['route' => $route]);
     }
 
     /**
@@ -92,6 +94,7 @@ class RouteController extends BaseController
     public function editView($id)
     {
         $route = $this->routeService->getById($id);
+        if (!$route) return $this->handleNullEntity('route');
         return $this->render('route/edit.html.twig', [
             'form' => $this->createForm(RouteType::class, $route)->remove('image')->remove('fromAirport')->remove('toAirport')->remove('flightNumber')->createView(),
             'route' => $route
@@ -109,10 +112,11 @@ class RouteController extends BaseController
     public function editProcess(Request $request, string $id)
     {
         $route = $this->routeService->getById($id);
+        if (!$route) return $this->handleNullEntity('route');
         return $this->verifyEntity(RouteType::class, 'route', $route, $request, 'route/edit.html.twig', function (RouteEntity $route) {
             $this->routeService->edit($route);
         }, 'all_routes', [], ['fromAirport', 'toAirport', 'image', 'flightNumber']);
-        // ---
+        // Old code ---
 //        $form = $this->createForm(RouteType::class, $route);
 //        $form->remove('fromAirport')->remove('toAirport')->remove('image')->remove('flightNumber');
 //        $form->handleRequest($request);

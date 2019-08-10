@@ -61,4 +61,10 @@ abstract class BaseController extends Controller
         }
         return $newArr;
     }
+
+    protected function handleNullEntity(string $entityName, string $redirectRoute = 'admin_panel')
+    {
+        $this->addFlash('error', "No such $entityName.");
+        return $this->redirectToRoute($redirectRoute);
+    }
 }

@@ -26,4 +26,10 @@ abstract class AbstractService
         $this->em->persist($entity);
         $this->em->flush();
     }
+
+    protected function update(object $entity)
+    {
+        $this->em->merge($entity);
+        $this->em->flush();
+    }
 }

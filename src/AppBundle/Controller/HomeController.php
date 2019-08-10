@@ -8,10 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends BaseController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="index", methods={"GET"})
+     *
      * @return Response
      */
-    public function index()
+    public function indexView()
     {
         return $this->render('home/index.html.twig');
     }

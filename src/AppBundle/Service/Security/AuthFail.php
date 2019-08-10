@@ -18,7 +18,7 @@ class AuthFail extends DefaultAuthenticationFailureHandler
     private  $flashBag;
 
 
-    public function __construct(HttpKernelInterface $httpKernel, HttpUtils $httpUtils,  FlashBagInterface $flashBag, array $options = [], LoggerInterface $logger = null)
+    public function __construct(HttpKernelInterface $httpKernel, HttpUtils $httpUtils, FlashBagInterface $flashBag, array $options = [], LoggerInterface $logger = null)
     {
         $this->flashBag = $flashBag;
         parent::__construct($httpKernel, $httpUtils, $options, $logger);

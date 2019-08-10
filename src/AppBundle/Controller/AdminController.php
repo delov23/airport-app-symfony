@@ -7,7 +7,6 @@ use AppBundle\Service\Role\RoleServiceInterface;
 use AppBundle\Service\Route\RouteServiceInterface;
 use AppBundle\Service\User\UserServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -54,8 +53,9 @@ class AdminController extends BaseController
     public function makeAdminProcess($id)
     {
         $user = $this->userService->getById($id);
-        $user->addRole($this->roleService->findByName('ROLE_ADMIN'));
-        $this->userService->edit($user);
+        $user
+            ? $this->userService->addRoleAndSave($user, $this->roleService->findByName('ROLE_ADMIN'))
+            : $this->addFlash('error', 'No such user.');
         return $this->redirectToRoute('admin_panel');
     }
 

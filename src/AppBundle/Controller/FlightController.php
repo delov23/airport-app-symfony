@@ -56,12 +56,15 @@ class FlightController extends BaseController
      */
     public function scheduleView()
     {
-        $userFlights = $this->userService->getById($this->getUser()->getId())->getFlights()->toArray();
-        return $this->render('flight/schedule.html.twig', [
-            'departures' => $this->flightService->getByType('departures'),
-            'arrivals' => $this->flightService->getByType('arrivals'),
-            'flightIds' => array_map(function (Flight $flight) { return $flight->getId(); }, $userFlights),
-        ]);
+        $props = ['departures' => $this->flightService->getByType('departures'), 'arrivals' => $this->flightService->getByType('arrivals')];
+        if ($this->getUser()) {
+            $userFlights = $this->userService->getById($this->getUser()->getId())->getFlights()->toArray();
+            $flightIds = array_map(function (Flight $flight) {
+                return $flight->getId();
+            }, $userFlights);
+            $props['flightIds'] = $flightIds;
+        }
+        return $this->render('flight/schedule.html.twig', $props);
     }
 
     /**
@@ -73,7 +76,9 @@ class FlightController extends BaseController
     public function createView()
     {
         return $this->render('flight/create.html.twig',
-            array_merge($this->getFormArray(FlightType::class, new Flight(), 'flight'), ['routes' => $this->routeService->getAll()]));
+            array_merge($this->getFormArray(FlightType::class, new Flight(), 'flight'),
+                ['routes' => $this->routeService->getAll()])
+        );
     }
 
     /**
@@ -102,6 +107,7 @@ class FlightController extends BaseController
     public function editView($id)
     {
         $flight = $this->flightService->getById($id);
+        if (!$flight) return $this->handleNullEntity('flight');
         return $this->render('flight/edit.html.twig', array_merge(
             $this->getFormArray(FlightDetailsType::class, $flight, 'flight'),
             ['progressTypes' => $this->progressService->getAll()]
@@ -119,6 +125,7 @@ class FlightController extends BaseController
     public function editProcess(Request $request, $id)
     {
         $flight = $this->flightService->getById($id);
+        if (!$flight) return $this->handleNullEntity('flight');
         return $this->verifyEntity(FlightDetailsType::class, 'flight', $flight, $request, 'flight/edit.html.twig',
             function (Flight $flight) {
                 $success = $this->flightService->edit($flight);
@@ -157,7 +164,9 @@ class FlightController extends BaseController
      */
     public function detailsView(int $id)
     {
-        return $this->render('flight/details.html.twig', ['flight' => $this->flightService->getById($id)]);
+        $flight = $this->flightService->getById($id);
+        if (!$flight) return $this->handleNullEntity('flight','user_profile');
+        return $this->render('flight/details.html.twig', ['flight' => $flight]);
     }
 
     /**
@@ -170,6 +179,7 @@ class FlightController extends BaseController
     public function remove($id)
     {
         $flight = $this->flightService->getById($id);
+        if (!$flight) return $this->handleNullEntity('flight');
         $this->flightService->remove($flight);
         return $this->redirectToRoute('search_flight', ['flight' => $flight->getRoute()->getFlightNumber()]);
     }
@@ -186,7 +196,9 @@ class FlightController extends BaseController
     {
         /** @var User $user */
         $user = $this->getUser();
-        $this->userService->toggleFlight($user, $this->flightService->getById($id));
+        $flight = $this->flightService->getById($id);
+        if (!$flight) return $this->handleNullEntity('flight','user_profile');
+        $this->userService->toggleFlight($user, $flight);
         $view = $request->get('redirectView') ? $request->get('redirectView') : 'flight_schedule';
         return $this->redirectToRoute($view);
     }

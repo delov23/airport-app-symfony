@@ -95,7 +95,6 @@ class UserController extends BaseController
      * @Route("/edit", methods={"POST"})
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
-     *
      * @param Request $request
      * @return Response
      */

@@ -5,6 +5,7 @@ namespace AppBundle\Service\User;
 
 
 use AppBundle\Entity\Flight;
+use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Repository\UserRepository;
 use AppBundle\Service\AbstractService;
@@ -58,8 +59,7 @@ class UserService extends AbstractService implements UserServiceInterface
 
     public function edit(User $user): void
     {
-        $this->em->merge($user);
-        $this->em->flush();
+        $this->update($user);
     }
 
     public function toggleFlight(User $user, Flight $flight): void
@@ -76,5 +76,11 @@ class UserService extends AbstractService implements UserServiceInterface
     {
         $user->setPassword($this->encoder->encodePassword($user, $newPassword));
         $this->save($user);
+    }
+
+    public function addRoleAndSave(User $user, Role $role)
+    {
+        $user->addRole($role);
+        $this->update($user);
     }
 }

@@ -31,15 +31,15 @@ class UserType extends AbstractType
             ])
             ->add('fullName', TextType::class, [
                 'constraints' => [
-                    new Regex('/^[A-Z][a-z]+\s[A-Z][a-z]+$/'),
-                    new Length(['min' => 5, 'max' => 35]),
-                    new NotBlank()
+                    new Regex('/^[A-Z][a-z]+\s[A-Z][a-z]+\s[A-Z][a-z]+$/'),
+                    new Length(['min' => 5, 'max' => 55]),
+                    new NotBlank(['message' => 'The field "Full Name" is required.'])
                 ]
             ])
             ->add('title', TextType::class, [
                 'constraints' => [
                     new Length(['min' => 2, 'max' => 10]),
-                    new NotBlank()
+                    new NotBlank(['message' => 'The field "Title" is required.'])
                 ]
             ])
             ->add('image', VichFileType::class, [
@@ -49,7 +49,7 @@ class UserType extends AbstractType
                 'download_link' => true,
                 'constraints' => [
                     new Image(['maxSize' => '2M']),
-                    new NotBlank()
+                    new NotBlank(['message' => 'The field "Image" is required.'])
                 ]
             ])
             ->add('password', RepeatedType::class, [
@@ -57,7 +57,7 @@ class UserType extends AbstractType
                 'type' => PasswordType::class,
                 'constraints' => [
                     new Length(['min' => 5, 'max' => 80]),
-                    new NotBlank()
+                    new NotBlank(['message' => 'The field "Password" is required.'])
                 ]
             ]);
     }

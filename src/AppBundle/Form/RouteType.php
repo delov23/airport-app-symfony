@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Time;
@@ -28,43 +29,42 @@ class RouteType extends AbstractType
                 'download_link' => true,
                 'constraints' => [
                     new Image(['maxSize' => '2M', 'maxSizeMessage' => 'The image is too big']),
-                    new NotBlank(['message' => 'Please provide an image'])
+                    new NotBlank(['message' => 'The field "Image" is required.'])
                 ]
             ])
             ->add('flightNumber', TextType::class, [
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['message' => 'The field "Flight Number" is required.']),
                     new Regex(['pattern' => '/[A-Z0-9]{5,7}/', 'message' => 'The flight number is not valid'])
                 ]
             ])
             ->add('company', TextType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'Please, provide a company']),
-                    new Regex(['pattern' => '/[A-Z]{2,3}/', 'message' => '...'])
+                    new NotBlank(['message' => 'The field "Company" is required.']),
+                    new Length(['max' => 30, 'maxMessage' => 'The company name is too long.'])
                 ]
             ])
             ->add('duration', TextType::class, [
                 'constraints' => [
                     new Regex(['pattern' => '/\d{1,2}\:\d{1,2}/', 'message' => 'The duration should be in the format HOURS:MINUTES']),
-                    new NotBlank(['message' => 'Please provide a duration'])
+                    new NotBlank(['message' => 'The field "Duration" is required.'])
                 ]
             ])
             ->add('fromAirport', TextType::class, [
                 'constraints' => [
-                    new NotBlank(),
-                    new Regex('/[A-Z]{2,4}/')
+                    new NotBlank(['message' => 'The field "From Airport" is required.']),
+                    new Length(['max' => 40, 'maxMessage' => 'The airport name is too long.'])
                 ],
             ])
             ->add('toAirport', TextType::class, [
                 'constraints' => [
-                    new NotBlank(),
-                    new Regex('/[A-Z]{2,4}/')
+                    new NotBlank(['message' => 'The field "To Airport" is required.']),
+                    new Length(['max' => 40, 'maxMessage' => 'The airport name is too long.'])
                 ]
             ])
             ->add('seats', NumberType::class, [
                 'constraints' => [
-                    new NotBlank(),
-//                    new Count(['min' => 10, 'max' => 200])
+                    new NotBlank(['message' => 'The field "Seats" is required.']),
                 ]
             ]);
     }

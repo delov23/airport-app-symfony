@@ -13,6 +13,9 @@
     <main class="main-section">
         <div class="columns margin-top">
             <div class="column">
+                {% for message in app.session.flashbag.get('error') %}
+                    <h2 class="error-msg text-center">{{ message }}</h2>
+                {% endfor %}
                 <h1 class="text-center fancy-text">Admin Panel</h1>
                 <div class="columns">
                     <div class="column text-center">

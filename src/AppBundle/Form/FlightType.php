@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class FlightType extends AbstractType
@@ -37,7 +38,7 @@ class FlightType extends AbstractType
                     return strtoupper($route->getFlightNumber());
                 },
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['message' => 'The field "Route" is required']),
                 ]
             ])
             ->add('date', DateTimeType::class, [
@@ -45,7 +46,7 @@ class FlightType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text',
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['message' => 'The field "Date" is required']),
                 ]
             ])
             ->add('price', NumberType::class, [
@@ -55,7 +56,8 @@ class FlightType extends AbstractType
             ])
             ->add('terminal', TextType::class, [
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['message' => 'The field "Terminal" is required']),
+                    new Length(['max' => 30, 'maxMessage' => 'The terminal name is too long.'])
                 ]
             ]);
     }
