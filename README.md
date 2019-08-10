@@ -7,7 +7,7 @@
 - Add Security - ✅
 - Add Authentication & Authorisation ✅
 - Repository as a Service - ✅
-- Constraints and verifications
+- Constraints and verifications ✅
 - Login, Register -> check if anonymous ✅
 
 ## Functionality
@@ -56,6 +56,6 @@
 - Split logic into an Admin Controller ✅
 
 6. Non-code related TODO's:
-- Check MIC
-- Check Skype
+- Check MIC ✅
+- Check Skype ✅
 - Add documentation

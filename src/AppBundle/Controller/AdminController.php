@@ -44,7 +44,7 @@ class AdminController extends BaseController
     }
 
     /**
-     * @Route("/make/{id}", methods={"POST"}, name="make_admin")
+     * @Route("/make/{id}", methods={"POST"}, name="make_admin", requirements={"id"="\d+"})
      * @Security("has_role('ROLE_ADMIN')")
      *
      * @param $id

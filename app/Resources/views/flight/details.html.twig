@@ -27,7 +27,7 @@
             <div class="column"><h3>{{ flight.route.duration }} hours</h3></div>
         </div>
         <div class="margin-top columns text-center">
-            <div class="column"><h3>{{ flight.progress.event }} {{ flight.progressTime }}</h3></div>
+            <div class="column"><h3>{{ flight.progress.event }} {{ flight.progressTime|date('H:i') }}</h3></div>
         </div>
         <div class="margin-top columns text-center">
             <div class="column"><h3>Check in until: {% if flight.checkIn %}{{ flight.checkIn|date }}{% else %}n/a{% endif %}</h3></div>

@@ -98,7 +98,7 @@ class FlightController extends BaseController
     }
 
     /**
-     * @Route("/edit/{id}", name="flight_edit", methods={"GET"})
+     * @Route("/edit/{id}", name="flight_edit", methods={"GET"}, requirements={"id"="\d+"})
      * @Security("has_role('ROLE_ADMIN')")
      *
      * @param $id
@@ -115,7 +115,7 @@ class FlightController extends BaseController
     }
 
     /**
-     * @Route("/edit/{id}", methods={"POST"})
+     * @Route("/edit/{id}", methods={"POST"}, requirements={"id"="\d+"})
      * @Security("has_role('ROLE_ADMIN')")
      *
      * @param Request $request
@@ -156,7 +156,7 @@ class FlightController extends BaseController
     }
 
     /**
-     * @Route("/{id}", name="flight_details", methods={"GET"})
+     * @Route("/{id}", name="flight_details", methods={"GET"}, requirements={"id"="\d+"})
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
      * @param int $id
@@ -170,7 +170,7 @@ class FlightController extends BaseController
     }
 
     /**
-     * @Route("/remove/{id}", name="flight_remove", methods={"POST"})
+     * @Route("/remove/{id}", name="flight_remove", methods={"POST"}, requirements={"id"="\d+"})
      * @Security("has_role('ROLE_ADMIN')")
      *
      * @param $id
@@ -185,7 +185,7 @@ class FlightController extends BaseController
     }
 
     /**
-     * @Route("/star/{id}", name="flight_star", methods={"GET"})
+     * @Route("/star/{id}", name="flight_star", methods={"GET"}, requirements={"id"="\d+"})
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
      * @param Request $request

@@ -100,15 +100,20 @@ class UserController extends BaseController
      */
     public function editProcess(Request $request)
     {
-        $user = $this->getUser();
-        $form = $this->createForm(UserType::class, $user);
-        $form->remove('email')->remove('password')->remove('image');
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $this->userService->edit($user);
-            return $this->redirectToRoute('user_profile');
-        } else {
-            return $this->render('user/edit.html.twig', ['errors' => $this->mapErrors($form->getErrors(true)), 'form' => $form->createView(), 'user' => $user]);
-        }
+        return $this->verifyEntity(UserType::class, 'user', $this->getUser(), $request, 'user/edit.html.twig',
+            function (User $user) {
+                $this->userService->edit($user);
+            }, 'user_profile', [], ['email', 'password', 'image']);
+        // OLD CODE ---
+//        $user = $this->getUser();
+//        $form = $this->createForm(UserType::class, $user);
+//        $form->remove('email')->remove('password')->remove('image');
+//        $form->handleRequest($request);
+//        if ($form->isValid()) {
+//            $this->userService->edit($user);
+//            return $this->redirectToRoute('user_profile');
+//        } else {
+//            return $this->render('user/edit.html.twig', ['errors' => $this->mapErrors($form->getErrors(true)), 'form' => $form->createView(), 'user' => $user]);
+//        }
     }
 }

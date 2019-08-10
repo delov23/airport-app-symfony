@@ -87,6 +87,13 @@ nav {
     width: 25vw !important;
 }
 
+.error-404 {
+    display: flex;
+    min-height: 90vh;
+    justify-content: center;
+    align-items: center;
+}
+
 .btn-full-landing {
     width: 304px !important;
 }
