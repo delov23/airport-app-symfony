@@ -71,4 +71,10 @@ class UserService extends AbstractService implements UserServiceInterface
         }
         $this->edit($user);
     }
+
+    public function resetPassword(User $user, string $newPassword): void
+    {
+        $user->setPassword($this->encoder->encodePassword($user, $newPassword));
+        $this->save($user);
+    }
 }

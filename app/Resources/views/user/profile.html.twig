@@ -11,6 +11,9 @@
 
 {% block main %}
     <main class="main-section">
+        {% for message in app.session.flashbag.get('success') %}
+            <h2 class="text-center text-success">{{ message }}</h2>
+        {% endfor %}
         <h1 class="text-center fancy-text">
             Welcome, {{ user.title }} {{ user.fullName }}
         </h1>
@@ -61,7 +64,7 @@
         <hr/>
         <div class="column text-center margin-top">
             <h2>Your account</h2>
-            <a href="{{ path('user_profile') }}">
+            <a href="{{ path('password_reset') }}">
                 <button class="btn btn-outline bg-white">Request password change</button>
             </a>
             <a href="{{ path('user_edit') }}">

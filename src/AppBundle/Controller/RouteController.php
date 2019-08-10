@@ -48,7 +48,15 @@ class RouteController extends BaseController
     {
         return $this->verifyEntity(RouteType::class, 'route', new RouteEntity(), $request, 'route/create.html.twig',
             function ($route) {
-                $this->routeService->create($route);
+                $success = $this->routeService->create($route);
+                if (!$success) {
+                    $alert = 'One of the airports has to be Plovdiv Airport.';
+                    return $this->render('route/create.html.twig', array_merge(
+                        $this->getFormArray(RouteType::class, $route, 'route'),
+                        ['errors' => ['fromAirport' => $alert, 'toAirport' => $alert]]
+                    ));
+                }
+                return null;
             }
         );
     }
@@ -101,14 +109,18 @@ class RouteController extends BaseController
     public function editProcess(Request $request, string $id)
     {
         $route = $this->routeService->getById($id);
-        $form = $this->createForm(RouteType::class, $route);
-        $form->remove('fromAirport')->remove('toAirport')->remove('image')->remove('flightNumber');
-        $form->handleRequest($request);
-        if ($form->isValid()) {
+        return $this->verifyEntity(RouteType::class, 'route', $route, $request, 'route/edit.html.twig', function (RouteEntity $route) {
             $this->routeService->edit($route);
-            return $this->redirectToRoute('route_details', ['id' => $id]);
-        } else {
-            return $this->render('route/edit.html.twig', ['errors' => $this->mapErrors($form->getErrors(true)), 'form' => $form->createView(), 'route' => $route]);
-        }
+        }, 'all_routes', [], ['fromAirport', 'toAirport', 'image', 'flightNumber']);
+        // ---
+//        $form = $this->createForm(RouteType::class, $route);
+//        $form->remove('fromAirport')->remove('toAirport')->remove('image')->remove('flightNumber');
+//        $form->handleRequest($request);
+//        if ($form->isValid()) {
+//            $this->routeService->edit($route);
+//            return $this->redirectToRoute('route_details', ['id' => $id]);
+//        } else {
+//            return $this->render('route/edit.html.twig', ['errors' => $this->mapErrors($form->getErrors(true)), 'form' => $form->createView(), 'route' => $route]);
+//        }
     }
 }

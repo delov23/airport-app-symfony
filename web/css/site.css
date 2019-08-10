@@ -219,6 +219,10 @@ nav {
     text-align: right !important;
 }
 
+.text-success {
+    color: #28b328;
+}
+
 /* FORMS */
 .form-wrapper {
     display: flex;

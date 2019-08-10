@@ -27,7 +27,7 @@
                         <p class="error-msg">{% if errors.fullName is defined %}{{ errors.fullName|join('. ') }}{% endif %}</p>
 
                         <div class="form-group text-center">
-                            <a href="#">
+                            <a href="{{ path('password_reset') }}">
                                 <button type="button" class="btn-wide btn-fill-danger">Request Password Change</button>
                             </a>
                         </div>

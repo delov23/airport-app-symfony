@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
@@ -91,11 +93,19 @@ class User implements UserInterface, Serializable
      */
     private $flights;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Authentication", mappedBy="user")
+     */
+    private $authentications;
+
 
     public function __construct()
     {
         $this->roles = new ArrayCollection();
         $this->flights = new ArrayCollection();
+        $this->authentications = new ArrayCollection();
     }
 
     /**
@@ -304,7 +314,8 @@ class User implements UserInterface, Serializable
             $this->fullName,
             $this->roles,
             $this->imageName,
-            $this->flights
+            $this->flights,
+            $this->authentications
         ]);
     }
 
@@ -318,7 +329,8 @@ class User implements UserInterface, Serializable
             $this->fullName,
             $this->roles,
             $this->imageName,
-            $this->flights
+            $this->flights,
+            $this->authentications
             ) = unserialize($serialized);
     }
 
@@ -343,6 +355,43 @@ class User implements UserInterface, Serializable
     public function addFlight(Flight $flight)
     {
         $this->flights[] = $flight;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAuthentications(): Collection
+    {
+        return $this->authentications;
+    }
+
+    /**
+     * @param ArrayCollection|Collection $authentications
+     * @return User
+     */
+    public function setAuthentications(ArrayCollection $authentications): User
+    {
+        $this->authentications = $authentications;
+        return $this;
+    }
+
+    /**
+     * @param Authentication $authentication
+     * @return User
+     */
+    public function addAuthentication(Authentication $authentication): self
+    {
+        $this->authentications[] = $authentication;
+        return $this;
+    }
+
+    public function hasAuthentication(): bool
+    {
+        $validAuth = $this->authentications->filter(function (Authentication $authentication) {
+            return $authentication->getExpiryDate() > new DateTime();
+        });
+
+        return $validAuth->count() > 0;
     }
 }
 

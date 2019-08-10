@@ -8,7 +8,7 @@ use AppBundle\Entity\Route;
 
 interface RouteServiceInterface
 {
-    public function create(Route $route): void;
+    public function create(Route $route): bool;
 
     /**
      * @return Route[]|null

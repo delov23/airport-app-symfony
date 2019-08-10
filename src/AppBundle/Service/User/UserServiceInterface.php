@@ -18,4 +18,6 @@ interface UserServiceInterface
     public function edit(User $user): void;
 
     public function toggleFlight(User $user, Flight $flight): void;
+
+    public function resetPassword(User $user, string $newPassword);
 }

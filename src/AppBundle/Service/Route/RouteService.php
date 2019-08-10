@@ -23,9 +23,13 @@ class RouteService extends AbstractService implements RouteServiceInterface
         $this->routeRepository = $routeRepository;
     }
 
-    public function create(Route $route): void
+    public function create(Route $route): bool
     {
+        if ($route->getFromAirport() !== self::PLOVDIV_AIRPORT && $route->getToAirport() !== self::PLOVDIV_AIRPORT) {
+            return false;
+        }
         $this->save($route);
+        return true;
     }
 
     /**
