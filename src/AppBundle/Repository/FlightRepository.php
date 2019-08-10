@@ -54,6 +54,7 @@ class FlightRepository extends EntityRepository
             ->andWhere('f.date > :start')
             ->andWhere('f.date < :end')
             ->setParameter('start', $start, Type::DATETIME)
+            ->orderBy('f.date', 'ASC')
             ->setParameter('end', $end, Type::DATETIME);
         return $qb->getQuery()->getResult();
     }

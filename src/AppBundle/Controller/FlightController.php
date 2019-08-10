@@ -127,7 +127,7 @@ class FlightController extends BaseController
                     return $this->render('flight/edit.html.twig', $finalArray);
                 }
                 return null;
-            }, 'index', ['progressTypes' => $this->progressService->getAll()]);
+            }, 'admin_panel', ['progressTypes' => $this->progressService->getAll()]);
     }
 
     /**
