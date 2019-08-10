@@ -23,15 +23,15 @@
                             <input id="duration" type="text" placeholder="Duration (H:m)" name="route[duration]"
                                    value="{{ route.duration }}"/>
                         </div>
-                        <p class="error-msg">{% if errors.duration is defined %}{{ errors.duration|join(', ') }}{% endif %}</p>
-                        <p class="error-msg">{% if errors.company is defined %}{{ errors.company|join(', ') }}{% endif %}</p>
+                        <p class="error-msg">{% if errors.duration is defined %}{{ errors.duration|join(' ') }}{% endif %}</p>
+                        <p class="error-msg">{% if errors.company is defined %}{{ errors.company|join(' ') }}{% endif %}</p>
 
                         <div class="label-group">
                             <label for="seats" class="text-white">Seats</label>
                         </div>
                         <div class="form-group">
                             <input id="seats" type="number" placeholder="Seats" name="route[seats]" value="{{ route.seats }}"/>
-                            <p class="error-msg">{% if errors.seats is defined %}{{ errors.seats|join(', ') }}{% endif %}</p>
+                            <p class="error-msg">{% if errors.seats is defined %}{{ errors.seats|join(' ') }}{% endif %}</p>
                         </div>
 
 {#                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('editRoute') }}" />#}

@@ -31,14 +31,14 @@ class UserType extends AbstractType
             ])
             ->add('fullName', TextType::class, [
                 'constraints' => [
-                    new Regex('/^[A-Z][a-z]+\s[A-Z][a-z]+\s[A-Z][a-z]+$/'),
+                    new Regex(['pattern' => '/^[A-Z][a-z]+\s[A-Z][a-z]+\s?[A-Z]?[a-z]*$/', 'message' => 'Include up to 3 names (2 at least).']),
                     new Length(['min' => 5, 'max' => 55]),
                     new NotBlank(['message' => 'The field "Full Name" is required.'])
                 ]
             ])
             ->add('title', TextType::class, [
                 'constraints' => [
-                    new Length(['min' => 2, 'max' => 10]),
+                    new Length(['min' => 2, 'minMessage' => 'The title is too short.', 'max' => 10, 'maxMessage' => 'The title is too long.']),
                     new NotBlank(['message' => 'The field "Title" is required.'])
                 ]
             ])

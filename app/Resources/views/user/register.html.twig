@@ -21,7 +21,7 @@
                             <label class="file-input" for="input-img">+</label>
                             <p class="file-description">Upload a profile picture</p>
                             <input type="file" accept="image/*" id="input-img" style="display: none;" placeholder="Profile Picture" name="user[image][file]" />
-                            <p class="error-msg">{% if errors.image is defined %}{{ errors.image|join('. ') }}{% endif %}</p>
+                            <p class="error-msg">{% if errors.image is defined %}{{ errors.image|join(' ') }}{% endif %}</p>
                         </div>
 
                         <div class="label-group">
@@ -32,25 +32,25 @@
                             <input id="title" class="small" type="text" placeholder="Title" name="user[title]" value="{{ user.title }}" />
                             <input id="fullName" class="large" type="text" placeholder="Name" name="user[fullName]" value="{{ user.fullName }}" />
                         </div>
-                        <p class="error-msg">{% if errors.title is defined %}{{ errors.title|join('. ') }}{% endif %}</p>
-                        <p class="error-msg">{% if errors.fullName is defined %}{{ errors.fullName|join('. ') }}{% endif %}</p>
+                        <p class="error-msg">{% if errors.title is defined %}{{ errors.title|join(' ') }}{% endif %}</p>
+                        <p class="error-msg">{% if errors.fullName is defined %}{{ errors.fullName|join(' ') }}{% endif %}</p>
 
                         <div class="label-group"><label for="email">Email</label></div>
                         <div class="form-group">
                             <input id="email" type="text" placeholder="Email" name="user[email]" value="{{ user.email }}" />
-                            <p class="error-msg">{% if errors.email is defined %}{{ errors.email|join('. ') }}{% endif %}</p>
+                            <p class="error-msg">{% if errors.email is defined %}{{ errors.email|join(' ') }}{% endif %}</p>
                         </div>
 
                         <div class="label-group"><label for="password">Password</label></div>
                         <div class="form-group">
                             <input id="password" type="password" placeholder="Password" name="user[password][first]"/>
-                            <p class="error-msg">{% if errors.first is defined %}{{ errors.first|join('. ') }}{% endif %}</p>
+                            <p class="error-msg">{% if errors.first is defined %}{{ errors.first|join(' ') }}{% endif %}</p>
                         </div>
 
                         <div class="label-group"><label for="password2">Repeat Password</label></div>
                         <div class="form-group">
                             <input id="password2" type="password" placeholder="Repeat Password" name="user[password][second]"/>
-                            <p class="error-msg">{% if errors.second is defined %}{{ errors.second|join('. ') }}{% endif %}</p>
+                            <p class="error-msg">{% if errors.second is defined %}{{ errors.second|join(' ') }}{% endif %}</p>
                         </div>
 
                         {{ form_row(form._token) }}

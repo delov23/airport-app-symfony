@@ -28,14 +28,14 @@ class RouteType extends AbstractType
                 'allow_delete' => false,
                 'download_link' => true,
                 'constraints' => [
-                    new Image(['maxSize' => '2M', 'maxSizeMessage' => 'The image is too big']),
+                    new Image(['maxSize' => '2M', 'maxSizeMessage' => 'The image is too big.']),
                     new NotBlank(['message' => 'The field "Image" is required.'])
                 ]
             ])
             ->add('flightNumber', TextType::class, [
                 'constraints' => [
                     new NotBlank(['message' => 'The field "Flight Number" is required.']),
-                    new Regex(['pattern' => '/[A-Z0-9]{5,7}/', 'message' => 'The flight number is not valid'])
+                    new Regex(['pattern' => '/[A-Z0-9]{5,7}/', 'message' => 'The flight number is not valid.'])
                 ]
             ])
             ->add('company', TextType::class, [
@@ -46,7 +46,7 @@ class RouteType extends AbstractType
             ])
             ->add('duration', TextType::class, [
                 'constraints' => [
-                    new Regex(['pattern' => '/\d{1,2}\:\d{1,2}/', 'message' => 'The duration should be in the format HOURS:MINUTES']),
+                    new Regex(['pattern' => '/\d{1,2}\:\d{1,2}/', 'message' => 'The duration should be in the format HOURS:MINUTES.']),
                     new NotBlank(['message' => 'The field "Duration" is required.'])
                 ]
             ])

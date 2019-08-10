@@ -13,8 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Count;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -41,12 +39,12 @@ class FlightDetailsType extends AbstractType
             ])
             ->add('price', NumberType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'The field "Price" is required'])
+                    new NotBlank(['message' => 'The field "Price" is required.'])
                 ],
             ])
             ->add('terminal', TextType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'The field "Terminal" is required']),
+                    new NotBlank(['message' => 'The field "Terminal" is required.']),
                     new Length(['max' => 30, 'maxMessage' => 'The terminal name is too long.'])
                 ]
             ])
@@ -56,7 +54,7 @@ class FlightDetailsType extends AbstractType
                     return $progress->getEvent();
                 },
                 'constraints' => [
-                    new NotBlank(['message' => 'The field "Progress" is required']),
+                    new NotBlank(['message' => 'The field "Progress" is required.']),
                 ]
             ])
             ->add('checkIn', DateTimeType::class, [
@@ -64,12 +62,12 @@ class FlightDetailsType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text',
                 'constraints' => [
-                    new NotBlank(['message' => 'The field "Check-in time" is required']),
+                    new NotBlank(['message' => 'The field "Check-in time" is required.']),
                 ]
             ])
             ->add('gate', TextType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'The field "Gate" is required']),
+                    new NotBlank(['message' => 'The field "Gate" is required.']),
                     new Length(['max' => 30, 'maxMessage' => 'The gate name is too long.'])
                 ]
             ])
@@ -78,7 +76,7 @@ class FlightDetailsType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text',
                 'constraints' => [
-                    new NotBlank(['message' => 'The field "Luggage Check-in time" is required']),
+                    new NotBlank(['message' => 'The field "Luggage Check-in time" is required.']),
                 ]
             ])
             ->add('progressTime', TimeType::class, [
@@ -86,12 +84,12 @@ class FlightDetailsType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text',
                 'constraints' => [
-                    new NotBlank(['message' => 'The field "Progress Time" is required']),
+                    new NotBlank(['message' => 'The field "Progress Time" is required.']),
                 ]
             ])
             ->add('seatsTaken', NumberType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'The field "Seats Taken" is required']),
+                    new NotBlank(['message' => 'The field "Seats Taken" is required.']),
                 ]
             ]);
     }

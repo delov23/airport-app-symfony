@@ -15,7 +15,7 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('password', RepeatedType::class, [
-            'invalid_message' => 'Passwords should match',
+            'invalid_message' => 'Passwords should match.',
             'type' => PasswordType::class,
             'constraints' => [
                 new Length(['min' => 5, 'max' => 80]),
