@@ -44,9 +44,9 @@ class FlightRepository extends EntityRepository
             ->addSelect('r')
             ->join('f.route', 'r');
         if ($type === 'arrivals') {
-            $qb->where("r.toAirport = 'PDV'");
+            $qb->where("r.toAirport = 'Plovdiv Airport'");
         } else if ($type === 'departures') {
-            $qb->where("r.fromAirport = 'PDV'");
+            $qb->where("r.fromAirport = 'Plovdiv Airport'");
         } else {
             return null;
         }

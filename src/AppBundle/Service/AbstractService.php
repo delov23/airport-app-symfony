@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 abstract class AbstractService
 {
-    const PLOVDIV_AIRPORT = 'PDV';
+    const PLOVDIV_AIRPORT = 'Plovdiv Airport';
 
     protected $em;
 

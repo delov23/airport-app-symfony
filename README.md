@@ -1,61 +1,84 @@
-# TODO
+# 🛫 Plovdiv Airport
 
-## Entities and Configurations
-- Add documentation - for last (TODO -> README)
-- Uploadable annotations for Route/User images - ✅
-- Add AWS mappings - ✅
-- Add Security - ✅
-- Add Authentication & Authorisation ✅
-- Repository as a Service - ✅
-- Constraints and verifications ✅
-- Login, Register -> check if anonymous ✅
+Description:
+View flights, keep up with the important data and explore new places with Plovdiv Airport's new site. This is my final project powered by Symfony for the PHP Web Module @ SoftUni.
 
-## Functionality
-0. Home
-- Landing - ✅
-- Base - ✅
-1. User 
-- Register ✅, Login ✅, Profile ✅, Edit ✅
-- (Extra) Reset Password via Email ✅
-2. Route 
-- C ✅, R ✅, U ✅ 
-- View All ✅
-3. Flight 
-- C ✅, R ✅, U ✅, D ✅
-- View Departures/Arrivals ✅
-4. Favourite flight (Many to many User-Flight) ✅
-5. Reset Password - Table Authentication:
-- Long id (Authentication string), expiry date and user_id (string id put as query) ✅
+Used technologies:
+PHP 7
+- Symfony 3.4.30
+Design
+- HTML 5 & CSS 3
+Front-end animations
+- Plain JS
+- The library AOS
+Other technologies
+- OpenWeatherMap API
+- S3 cloud for storing photos
+- SwiftMailer (a part of Symfony) for password reset verification
 
-## Finalisation of the project
-1. Final things to do
-- Favorite Flight ✅
-- Add labels on forms ✅
-- Check if one of the airports is PLV ✅
-- Make the fields full names -> PLV to Plovdiv Airport ✅
-- UN-star at profile ✅
-- Select menus -> selected attr ✅
+# Project Details
+## Entities
+- DEFINED AT DB
+Progress
+	id			
+	event		
+Role
+    id
+    name
+    users (MANY TO MANY)
+	
+- DEFINED ON-DEMAND
+User - done
+	id							
+	email									
+	password					
+	fullName					
+	title		
+	image			
+	authentications (ONE TO MANY)
+	flights (MANY TO MANY)	
+	roles (MANY TO MANY)	
+	
+Authentications
+    id
+    authString
+    expiryDate
+    user (MANY TO ONE)
+	
+Route
+	flightNumber (=id)   		
+	company
+	from 
+	to
+	duration 					
+	seats 						
+	image 		
+				
+Flight
+	id						
+	route (MANY TO ONE)	
+	dateTime				
+	terminal				
+	gate					
+	baggageCheckTime		
+	checkInTime				
+	progress (MANY TO ONE)	
+	progress_time			
+	seatsTaken 				
+	price 					
 
-2. Bonus Functionality
-- Password Change ✅
+## Basic idea of the Controllers, Services, Repositories
+- Security -> login, logout
+- Authentication -> create/reset-pass
+- User -> register/profile(my trips)
+- Admin -> admin-panel/promote-to-admin
+- Route -> create/edit/delete/view/view-all
+- Flight -> create/edit/delete/view/view-all/schedule
 
-3. Assertion
-- Verify that an entity exists ✅
-- HTML5 Validator 
-- Verify that seatsTaken <= seatsAll ✅
-- Constraints!!! - Custom messages ✅
-
-4. Checks
-- Final checks - be aware of dates, constraints and security
-- TEST THE SITE WITH: Unauthenticated people, USER_ROLE people and USER_ADMIN
-
-5. Code quality
-- Improve code quality
-- If time, improve form rendering (a lot repeating)
-- Functions out of the controller closures <-> callbacks
-- Split logic into an Admin Controller ✅
-
-6. Non-code related TODO's:
-- Check MIC ✅
-- Check Skype ✅
-- Add documentation
+## Views (highlights)
+- Flight Schedule ```Shows departures and arrivals from the previous day till the next one```
+- Reset Password Email ```Sending a well-formated email to reset a password```
+- 404 Page ```For production```
+- Responsive landing page ```Main things to do in the site```
+- A large admin panel ```Things you can do with the app```
+- Forms ```Interactive despite not having a SPA Front-end```

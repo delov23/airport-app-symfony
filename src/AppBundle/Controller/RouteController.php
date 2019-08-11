@@ -57,7 +57,7 @@ class RouteController extends BaseController
                     );
                 }
                 return null;
-            }
+            }, 'admin_panel'
         );
     }
 

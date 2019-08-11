@@ -21,7 +21,7 @@
 
                         <div class="label-group"><label for="price">Price per seat</label></div>
                         <div class="form-group">
-                            <input id="price" type="number" step="2" placeholder="Price per normal seat" name="flight_details[price]" value="{{ flight.price }}"/>
+                            <input id="price" type="number" step="0.01" placeholder="Price per normal seat" name="flight_details[price]" value="{{ flight.price }}"/>
                             <p class="error-msg">{% if errors.price is defined %}{{ errors.price|join(' ') }}{% endif %}</p>
                         </div>
 
