@@ -20,53 +20,53 @@ Other technologies
 ## Entities
 - DEFINED AT DB
 Progress
-	1. id			
-	2. event		
+1. id			
+2. event		
 Role
-    1. id
-    2. name
-    3. users (MANY TO MANY)
+1. id
+2. name
+3. users (MANY TO MANY)
 	
 - DEFINED ON-DEMAND
 User - done
 1. id							
-	2. email									
-	3. password					
-	4. fullName					
-	5. title		
-	6. image			
-	7. authentications (ONE TO MANY)
-	8. flights (MANY TO MANY)	
-	9. roles (MANY TO MANY)	
+2. email									
+3. password					
+4. fullName					
+5. title		
+6. image			
+7. authentications (ONE TO MANY)
+8. flights (MANY TO MANY)	
+9. roles (MANY TO MANY)	
 	
 Authentications
-    1. id
-    2. authString
-    3. expiryDate
-    4. user (MANY TO ONE)
+1. id
+2. authString
+3. expiryDate
+4. user (MANY TO ONE)
 	
 Route
-	1. flightNumber (=id)   		
-	2. company
-	3. from 
-	4. to
-	5. duration 					
-	6. seats 						
-	7. image
-	8. flights
+1. flightNumber (=id)   		
+2. company
+3. from 
+4. to
+5. duration 					
+6. seats 						
+7. image
+8. flights
 				
 Flight
-	1. id						
-	2. route (MANY TO ONE)	
-	3. dateTime				
-	4. terminal				
-	5. gate					
-	6. baggageCheckTime		
-	7. checkInTime				
-	8. progress (MANY TO ONE)	
-	9. progressTime			
-	10. seatsTaken 				
-	11. price 					
+1. id						
+2. route (MANY TO ONE)	
+3. dateTime				
+4. terminal				
+5. gate					
+6. baggageCheckTime		
+7. checkInTime				
+8. progress (MANY TO ONE)	
+9. progressTime			
+10. seatsTaken 				
+11. price 					
 
 ## Basic idea of the Controllers, Services, Repositories
 - Security -> login, logout
