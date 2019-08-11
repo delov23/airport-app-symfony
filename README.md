@@ -68,7 +68,13 @@ View flights, keep up with the important data and explore new places with Plovdi
 8. progress (MANY TO ONE)	
 9. progressTime			
 10. seatsTaken 				
-11. price 					
+11. price 			
+
+## The ```Abstract``` Controller
+To avoid repeating lines of code, I created a function that deals with the persistence of an entity. Also there is a function to verify that an entity is not NULL and finally, we also have got a function that creates a form array for a view.
+
+## The ```Abstract``` Service
+Holds the em and the encoder of passwords, as well as two functions to save and update an object.
 
 ## Basic idea of the Controllers, Services, Repositories
 - Security -> login/logout
