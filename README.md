@@ -73,7 +73,7 @@ Other technologies
 - Authentication -> create/reset-pass
 - User -> register/profile(my trips)
 - Admin -> admin-panel/promote-to-admin
-- Route -> create/edit/delete/view/view-all
+- Route -> create/edit/view/view-all
 - Flight -> create/edit/delete/view/view-all/schedule
 
 ## Views (highlights)
