@@ -3,18 +3,20 @@
 Description:
 View flights, keep up with the important data and explore new places with Plovdiv Airport's new site. This is my final project powered by Symfony for the PHP Web Module @ SoftUni.
 
-Used technologies:
-PHP 7
-- Symfony 3.4.30
-Design
-- HTML 5 & CSS 3
-Front-end animations
-- Plain JS
-- The library AOS
-Other technologies
-- OpenWeatherMap API
-- S3 cloud for storing photos
-- SwiftMailer (a part of Symfony) for password reset verification
+### Used technologies:
+- PHP 7
+	- Symfony 3.4.30
+- Design
+	- HTML 5 & CSS 3
+- Front-end animations
+	- Plain JS
+	- The library AOS
+- Other technologies
+	- OpenWeatherMap API
+	- S3 cloud for storing photos
+	- SwiftMailer (a part of Symfony) for password reset verification
+
+-----------
 
 # Project Details
 ## Entities - ```DEFINED AT DB```
@@ -69,9 +71,9 @@ Other technologies
 11. price 					
 
 ## Basic idea of the Controllers, Services, Repositories
-- Security -> login, logout
+- Security -> login/logout
 - Authentication -> create/reset-pass
-- User -> register/profile(my trips)
+- User -> register/profile/starred-flights
 - Admin -> admin-panel/promote-to-admin
 - Route -> create/edit/view/view-all
 - Flight -> create/edit/delete/view/view-all/schedule
